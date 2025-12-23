@@ -6,8 +6,12 @@ import { ShopContext } from '../context/ShopContext'
 const Navbar = () => {
   const [visible, setVisible] = useState(false)
   const [isProfileOpen, setIsProfileOpen] = useState(false)
-  const {setShowSearch, getCartCount} = useContext(ShopContext)
-  const navigate = useNavigate()
+  const {setShowSearch, getCartCount, navigate, token, setToken} = useContext(ShopContext)
+  const logout = () => {
+    navigate('/login')
+    localStorage.removeItem('token')
+    setToken('')
+  }
 
   const handleSearchClick = () => {
     navigate('/collection')
@@ -45,16 +49,18 @@ const Navbar = () => {
         </div>
 
         <div className='relative' onMouseEnter={() => setIsProfileOpen(true)} onMouseLeave={() => setIsProfileOpen(false)}>
-          <Link to='/login'><img src={assets.profile_icon} alt="" className='w-5 cursor-pointer hover:scale-110 transition-all duration-300'/></Link>
+          <Link to={token ? '/profile' : '/login'}><img src={assets.profile_icon} alt="" className='w-5 cursor-pointer hover:scale-110 transition-all duration-300'/></Link>
+          {token && (
           <div className={`absolute dropdown-menu right-0 sm:right-0 sm:left-auto left-[-120px] top-full pt-2 transition-all duration-300 transform z-50 ${
             isProfileOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-2 invisible'
           }`}>
             <div className='flex flex-col gap-1 w-40 py-4 px-4 bg-white text-gray-600 rounded-xl shadow-xl border border-gray-100 backdrop-blur-sm'>
-              <p className='cursor-pointer hover:text-yellow-600 hover:bg-yellow-50 px-3 py-2 rounded-lg transition-all duration-200 hover:translate-x-1'>My Profile</p>
+              <p onClick={() => navigate('/profile')} className='cursor-pointer hover:text-yellow-600 hover:bg-yellow-50 px-3 py-2 rounded-lg transition-all duration-200 hover:translate-x-1'>My Profile</p>
               <p onClick={()=>navigate('/orders')} className='cursor-pointer hover:text-yellow-600 hover:bg-yellow-50 px-3 py-2 rounded-lg transition-all duration-200 hover:translate-x-1'>Orders</p>
-              <p className='cursor-pointer hover:text-red-500 hover:bg-red-50 px-3 py-2 rounded-lg transition-all duration-200 hover:translate-x-1'>Logout</p>
+              <p onClick={logout} className='cursor-pointer hover:text-red-500 hover:bg-red-50 px-3 py-2 rounded-lg transition-all duration-200 hover:translate-x-1'>Logout</p>
             </div>
           </div>
+          )}
         </div>
         
         <Link to='/cart' className='relative group'>

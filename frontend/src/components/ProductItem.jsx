@@ -14,7 +14,7 @@ const ProductItem = ({id,image,name,price}) => {
 
         <div className='relative overflow-hidden aspect-[3/4] bg-gradient-to-br from-gray-50 to-gray-100'>
           <img 
-            src={image[0]} 
+            src={image && image[0]} 
             alt={name} 
             className='w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out'
           />

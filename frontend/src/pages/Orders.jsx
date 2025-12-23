@@ -1,9 +1,29 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { ShopContext } from '../context/ShopContext';
 import Title from '../components/Title';
+import axios from 'axios';
 
 const Orders = () => {
-  const {products, currency} = useContext(ShopContext);
+  const {currency, token, backendUrl} = useContext(ShopContext);
+  const [orderData, setOrderData] = useState([]);
+
+  const loadOrderData = async () => {
+    try {
+      if(!token) {
+        return null
+      }
+      const response = await axios.post(backendUrl + '/api/order/userorders', {}, {headers:{token}})
+      if(response.data.success) {
+        setOrderData(response.data.orders.reverse())
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    loadOrderData()
+  }, [token])
   return (
     <div className='bg-gradient-to-b from-yellow-50/30 to-white min-h-screen'>
       <div className='border-t border-gray-200 pt-12 max-w-6xl mx-auto px-4'>
@@ -17,52 +37,55 @@ const Orders = () => {
 
         <div className='space-y-6'>
           {
-            products.slice(1,4).map((item, index) => (
+            orderData.map((order, index) => (
               <div key={index} className='bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300'>
-                <div className='flex flex-col lg:flex-row lg:items-center gap-6'>
-                  
-                  <div className='flex items-start gap-6 flex-1'>
-                    <div className='relative group'>
-                      <img 
-                        src={item.image[0]} 
-                        alt="" 
-                        className='w-20 h-20 md:w-24 md:h-24 object-cover rounded-xl group-hover:scale-105 transition-transform duration-300'
-                      />
-                      <div className='absolute inset-0 bg-gradient-to-t from-black/10 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
-                    </div>
-                    
-                    <div className='flex-1'>
-                      <h3 className='text-lg md:text-xl font-semibold text-gray-800 mb-3 leading-tight'>{item.name}</h3>
-                      <div className='flex flex-wrap items-center gap-3 mb-3'>
-                        <p className='text-2xl font-bold bg-gradient-to-r from-yellow-600 to-yellow-500 bg-clip-text text-transparent'>
-                          {currency}{item.price}
-                        </p>
-                        <span className='px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium'>
-                          Qty: 1
-                        </span>
-                        <span className='px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium'>
-                          Size: M
-                        </span>
-                      </div>
-                      <div className='flex items-center gap-2 text-gray-600'>
-                        <svg className='w-4 h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                          <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z' />
-                        </svg>
-                        <p className='text-sm'>Order Date: <span className='font-medium text-gray-800'>15 Jul, 2024</span></p>
-                      </div>
-                    </div>
+                <div className='flex justify-between items-start mb-4'>
+                  <div>
+                    <h3 className='text-lg font-semibold text-gray-800'>Order #{order._id.slice(-8)}</h3>
+                    <p className='text-sm text-gray-600'>Placed on {new Date(order.date).toDateString()}</p>
                   </div>
-                  
-                  <div className='flex flex-col sm:flex-row lg:flex-col gap-4 lg:w-48'>
-                    <div className='flex items-center gap-3 px-4 py-3 bg-green-50 rounded-xl border border-green-200'>
-                      <div className='relative'>
-                        <div className='w-3 h-3 bg-green-500 rounded-full'></div>
-                        <div className='absolute inset-0 bg-green-500 rounded-full animate-ping opacity-75'></div>
+                  <div className='text-right'>
+                    <p className='text-lg font-bold text-gray-800'>{currency}{order.amount}</p>
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                      order.status === 'Order Placed' ? 'bg-blue-100 text-blue-800' :
+                      order.status === 'Packing' ? 'bg-yellow-100 text-yellow-800' :
+                      order.status === 'Shipped' ? 'bg-purple-100 text-purple-800' :
+                      order.status === 'Out for delivery' ? 'bg-orange-100 text-orange-800' :
+                      order.status === 'Delivered' ? 'bg-green-100 text-green-800' :
+                      'bg-gray-100 text-gray-800'
+                    }`}>
+                      {order.status}
+                    </span>
+                  </div>
+                </div>
+                
+                <div className='space-y-3'>
+                  {order.items.map((item, itemIndex) => (
+                    <div key={itemIndex} className='flex items-center gap-4 p-3 bg-gray-50 rounded-lg'>
+                      <img 
+                        src={item.images && item.images[0] ? item.images[0] : '/placeholder.jpg'} 
+                        alt={item.name} 
+                        className='w-16 h-16 object-cover rounded-lg'
+                      />
+                      <div className='flex-1'>
+                        <h4 className='font-medium text-gray-800'>{item.name}</h4>
+                        <div className='flex items-center gap-4 text-sm text-gray-600'>
+                          <span>Size: {item.size}</span>
+                          <span>Qty: {item.quantity}</span>
+                          <span className='font-medium text-gray-800'>{currency}{item.price}</span>
+                        </div>
                       </div>
-                      <p className='text-sm font-semibold text-green-700'>Ready to Ship</p>
                     </div>
-                    
-                    <button className='px-6 py-3 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white rounded-xl font-semibold text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95'>
+                  ))}
+                </div>
+                
+                <div className='mt-4 pt-4 border-t border-gray-200'>
+                  <div className='flex justify-between items-center'>
+                    <div className='text-sm text-gray-600'>
+                      <p>Payment: <span className='font-medium'>{order.paymentMethod}</span></p>
+                      <p>Delivery to: {order.address.firstName} {order.address.lastName}</p>
+                    </div>
+                    <button className='px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg text-sm font-medium transition-colors duration-200'>
                       Track Order
                     </button>
                   </div>
@@ -72,7 +95,7 @@ const Orders = () => {
           }
         </div>
 
-        {products.slice(1,4).length === 0 && (
+        {orderData.length === 0 && (
           <div className='text-center py-20'>
             <div className='bg-white rounded-2xl p-12 shadow-lg border border-gray-100 max-w-md mx-auto'>
               <div className='w-24 h-24 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6'>

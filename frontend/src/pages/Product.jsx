@@ -3,19 +3,12 @@ import { useParams } from 'react-router-dom'
 import { ShopContext } from '../context/ShopContext';
 import { assets } from '../assets/assets/frontend_assets/assets';
 import RelatedProducts from '../components/RelatedProducts';
-
-const scrollbarHideStyle = {
-  '&::-webkit-scrollbar': {
-    display: 'none'
-  },
-  msOverflowStyle: 'none',
-  scrollbarWidth: 'none'
-};
+import { toast } from 'react-toastify';
 
 const Product = () => {
 
   const {productId} = useParams();
-  const {products, currency, addToCart} = useContext(ShopContext);
+  const {products, currency, addToCart, token, navigate} = useContext(ShopContext);
   const [productData, setProductData] = useState(false); 
   const [image, setImage] = useState('');
   const [size, setSize] = useState('')
@@ -24,7 +17,7 @@ const Product = () => {
     products.map((item)=>{
       if(item._id == productId){
         setProductData(item)
-        setImage(item.image[0])
+        setImage(item.images[0])
         return null;
       }
     });
@@ -39,12 +32,9 @@ const Product = () => {
       <div className='border-t border-gray-200 pt-12 transition-opacity ease-in duration-500 opacity-100'>
         <div className='flex gap-6 lg:gap-8 flex-col lg:flex-row max-w-7xl mx-auto px-4'>
           <div className='flex-1 flex flex-col-reverse gap-4 lg:flex-row'>            
-            <div 
-              className='flex lg:flex-col overflow-x-auto lg:overflow-y-auto justify-between lg:justify-start lg:w-28 gap-2 lg:h-full lg:max-h-[600px]'
-              style={scrollbarHideStyle}
-            >
+            <div className='flex lg:flex-col overflow-x-auto lg:overflow-y-auto justify-between lg:justify-start lg:w-28 gap-2 lg:h-full lg:max-h-[600px] scrollbar-hide'>
               {
-                productData.image.map((item, index)=>(
+                productData.images.map((item, index)=>(
                   <img 
                     onClick={()=>setImage(item)} 
                     src={item} 
@@ -106,10 +96,17 @@ const Product = () => {
               </div>
               
               <button 
-                onClick={()=>addToCart(productData._id, size)} 
+                onClick={()=>{
+                  if(!token) {
+                    toast.error('Please login to add items to cart')
+                    navigate('/login')
+                    return
+                  }
+                  addToCart(productData._id, size)
+                }} 
                 className='w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white py-4 px-8 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 mb-8'
               >
-                ADD TO CART
+                {token ? 'ADD TO CART' : 'LOGIN TO ADD TO CART'}
               </button>
               
               <div className='border-t border-gray-200 pt-6'>

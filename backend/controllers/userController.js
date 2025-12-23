@@ -13,16 +13,16 @@ const loginUser = async (req, res) => {
             const user = await userModel.findOne({email});
 
             if(!user){
-                  return res.json({success:false, message:"User not exists"});
+                  return res.json({success:false, message:"User does not exist"});
             }
 
             const isMatch = await bcrypt.compare(password, user.password);
             if(isMatch){
                   const token = createToken(user._id)
-                  res.json({success:true, token})
+                  res.json({success:true, token, message:"Login successful"})
             }  
             else {
-                  res.json({success:false, message:"Invalid credentials."});
+                  res.json({success:false, message:"Invalid credentials"});
             }
       } catch (error) {
             res.json({success:false, message:error.message})
@@ -35,14 +35,14 @@ const registerUser = async (req, res) => {
             const { name, email, password } = req.body;
             const exists = await userModel.findOne({email})
             if(exists) {
-                  return res.json({success:false, message:"User already Exists."})
+                  return res.json({success:false, message:"User already exists"})
             }
 
             if(!validator.isEmail(email)){
-                  return res.json({success:false, message:"Please Enter Valid Email Address."})
+                  return res.json({success:false, message:"Please enter a valid email address"})
             }
             if(password.length < 8){
-                  return res.json({success:false, message:"Password must be 8 characters long"})
+                  return res.json({success:false, message:"Password must be at least 8 characters long"})
             }
             const salt = await bcrypt.genSalt(8)
             const hashedPassword = await bcrypt.hash(password, salt)
@@ -53,13 +53,11 @@ const registerUser = async (req, res) => {
 
             const user = await newUser.save()
             const token = createToken(user._id)
-            res.json({success:true, token})
+            res.json({success:true, token, message:"Account created successfully"})
             
       } catch (error) {
             console.log(error);
             res.json({success:false, message:error.message})
-
-            
       }
 }
 
@@ -78,4 +76,15 @@ const adminLogin = async (req, res) => {
       }
 }
 
-export {loginUser, registerUser, adminLogin}
+const getUserProfile = async (req, res) => {
+      try {
+            const { userId } = req.body
+            const userData = await userModel.findById(userId).select('-password')
+            res.json({success: true, userData})
+      } catch (error) {
+            console.log(error)
+            res.json({success: false, message: error.message})
+      }
+}
+
+export {loginUser, registerUser, adminLogin, getUserProfile}

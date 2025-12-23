@@ -4,6 +4,16 @@ a.active hr{
       display: block
 }
 
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 ::-webkit-scrollbar{
       display: none;
 }

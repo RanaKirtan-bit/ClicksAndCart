@@ -64,7 +64,7 @@ const Cart = () => {
                         <div className='flex items-center gap-6'>
                           <div className='relative group'>
                             <img 
-                              src={productData.image[0]} 
+                              src={productData.images[0]} 
                               alt="" 
                               className='w-20 h-20 md:w-24 md:h-24 object-cover rounded-xl group-hover:scale-105 transition-transform duration-300'
                             />
