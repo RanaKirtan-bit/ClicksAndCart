@@ -1,7 +1,6 @@
 import orderModel from '../models/orderModel.js'
 import userModel from '../models/userModel.js'
 
-// Place order with COD
 const placeOrder = async (req, res) => {
     try {
         const { userId, items, amount, address } = req.body
@@ -29,7 +28,6 @@ const placeOrder = async (req, res) => {
     }
 }
 
-// Get user orders
 const userOrders = async (req, res) => {
     try {
         const { userId } = req.body
@@ -41,7 +39,6 @@ const userOrders = async (req, res) => {
     }
 }
 
-// List all orders for admin
 const listOrders = async (req, res) => {
     try {
         const orders = await orderModel.find({})
@@ -52,7 +49,6 @@ const listOrders = async (req, res) => {
     }
 }
 
-// Update order status
 const updateStatus = async (req, res) => {
     try {
         const { orderId, status } = req.body

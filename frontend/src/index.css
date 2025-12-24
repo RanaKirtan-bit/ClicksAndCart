@@ -24,3 +24,7 @@ a.active hr{
             color:white;
       }
 }
+
+*{
+  font-family: "Arial";
+}

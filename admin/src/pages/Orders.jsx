@@ -71,7 +71,6 @@ const Orders = () => {
           <p className='text-gray-600 mt-3'>Track and manage customer orders</p>
         </div>
 
-        {/* Order Stats */}
         <div className='grid grid-cols-2 md:grid-cols-5 gap-4 mb-8'>
           {[
             { status: 'Order Placed', color: 'blue' },
@@ -121,7 +120,6 @@ const Orders = () => {
                   </div>
                 </div>
 
-                {/* Customer Info */}
                 <div className='bg-gray-50 rounded-lg p-4 mb-4'>
                   <h4 className='font-semibold text-gray-800 mb-2'>Customer Details</h4>
                   <div className='grid md:grid-cols-2 gap-4 text-sm'>
@@ -141,13 +139,12 @@ const Orders = () => {
                   </div>
                 </div>
 
-                {/* Order Items */}
                 <div className='mb-4'>
                   <h4 className='font-semibold text-gray-800 mb-3'>Order Items</h4>
                   <div className='space-y-2'>
                     {order.items.map((item, itemIndex) => (
                       <div key={itemIndex} className='flex items-center gap-4 p-3 bg-white border border-gray-100 rounded-lg'>
-                        <img src={item.image[0]} alt={item.name} className='w-16 h-16 object-cover rounded-lg' />
+                        <img src={item.images[0]} alt={item.name} className='w-16 h-16 object-cover rounded-lg' />
                         <div className='flex-1'>
                           <h5 className='font-medium text-gray-800'>{item.name}</h5>
                           <p className='text-sm text-gray-600'>Size: {item.size} | Quantity: {item.quantity}</p>
@@ -161,7 +158,6 @@ const Orders = () => {
                   </div>
                 </div>
 
-                {/* Status Update */}
                 <div className='flex items-center justify-between pt-4 border-t border-gray-200'>
                   <div className='flex items-center gap-2'>
                     <span className='text-sm font-medium text-gray-700'>Update Status:</span>

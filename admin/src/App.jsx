@@ -13,6 +13,7 @@ export const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem('token') ? localStorage.getItem('token'):'');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(()=>{
     localStorage.setItem('token', token)
@@ -36,10 +37,10 @@ const App = () => {
         <Login setToken={setToken} />
       ) : (
         <>
-          <Navbar setToken={setToken} />
-          <div className="flex w-full">
-            <Sidebar />
-            <div className="flex-1 mx-auto ml-[max(5vw, 25px)] my-8 text-gray-600 text-base">
+          <Navbar setToken={setToken} setSidebarOpen={setSidebarOpen} sidebarOpen={sidebarOpen} />
+          <div className="flex w-full relative">
+            <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+            <div className="flex-1 w-full lg:ml-0 px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
               <Routes>
                 <Route path="/" element={<Navigate to="/add" replace />} />
                 <Route path="/add" element={<Add token={token} />} />

@@ -142,13 +142,12 @@ const PlaceOrder = () => {
                   className='w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-500 focus:outline-none transition-colors duration-200 placeholder-gray-500'
                   required
                 />
-                
                 <button 
-                  type='submit'
-                  className='w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white py-4 px-8 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95'
+                type='submit'
+                className='w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white py-4 px-8 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95'
                 >
-                  PLACE ORDER
-                </button>
+                PLACE ORDER
+              </button>
               </form>
             </div>
           </div>
@@ -215,9 +214,9 @@ const PlaceOrder = () => {
                 </div>
               </div>
 
-              <button 
-                disabled
-                className='w-full bg-gray-400 text-white py-4 px-8 rounded-xl font-semibold text-lg cursor-not-allowed'
+              <button disabled
+                type='submit'
+                className='w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white py-4 px-8 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95'
               >
                 PLACE ORDER
               </button>

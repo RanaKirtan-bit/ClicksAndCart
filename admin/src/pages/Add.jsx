@@ -60,19 +60,18 @@ const Add = ({token}) => {
   }
 
   return (
-    <div className='max-w-4xl mx-auto p-6'>
-      <div className='bg-white rounded-2xl shadow-lg border border-gray-100 p-8'>
-        <div className='mb-8'>
-          <h1 className='text-3xl font-bold text-gray-800 mb-2'>Add New Product</h1>
-          <div className='w-20 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full'></div>
-          <p className='text-gray-600 mt-3'>Fill in the details below to add a new product to your store</p>
+    <div className='max-w-full sm:max-w-4xl mx-auto p-4 sm:p-6'>
+      <div className='bg-white rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6 lg:p-8'>
+        <div className='mb-6 sm:mb-8'>
+          <h1 className='text-2xl sm:text-3xl font-bold text-gray-800 mb-2'>Add New Product</h1>
+          <div className='w-16 sm:w-20 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full'></div>
+          <p className='text-gray-600 mt-3 text-sm sm:text-base'>Fill in the details below to add a new product to your store</p>
         </div>
 
-        <form onSubmit={onSubmitHandler} className='space-y-8'>
-          {/* Image Upload Section */}
+        <form onSubmit={onSubmitHandler} className='space-y-6 sm:space-y-8'>
           <div>
-            <h3 className='text-lg font-semibold text-gray-800 mb-4'>Product Images</h3>
-            <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
+            <h3 className='text-base sm:text-lg font-semibold text-gray-800 mb-4'>Product Images</h3>
+            <div className='grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4'>
               {[
                 { image: image1, setImage: setImage1, label: "Main Image" },
                 { image: image2, setImage: setImage2, label: "Image 2" },
@@ -81,7 +80,7 @@ const Add = ({token}) => {
               ].map((item, index) => (
                 <div key={index} className='group'>
                   <label htmlFor={`image${index + 1}`} className='cursor-pointer block'>
-                    <div className='relative border-2 border-dashed border-gray-300 rounded-xl p-2 hover:border-yellow-400 transition-colors duration-300 group-hover:bg-yellow-50 h-36 flex items-center justify-center'>
+                    <div className='relative border-2 border-dashed border-gray-300 rounded-xl p-2 hover:border-yellow-400 transition-colors duration-300 group-hover:bg-yellow-50 h-28 sm:h-36 flex items-center justify-center'>
                       {item.image ? (
                         <img 
                           className='w-full h-full object-cover rounded-lg' 
@@ -90,9 +89,9 @@ const Add = ({token}) => {
                         />
                       ) : (
                         <div className='text-center'>
-                          <div className='text-4xl text-gray-400 mb-2'>📷</div>
-                          <span className='text-sm font-medium text-gray-600'>{item.label}</span>
-                          <p className='text-xs text-gray-500 mt-1'>Click to upload</p>
+                          <div className='text-2xl sm:text-4xl text-gray-400 mb-1 sm:mb-2'>📷</div>
+                          <span className='text-xs sm:text-sm font-medium text-gray-600'>{item.label}</span>
+                          <p className='text-xs text-gray-500 mt-1 hidden sm:block'>Click to upload</p>
                         </div>
                       )}
                     </div>
@@ -109,14 +108,13 @@ const Add = ({token}) => {
             </div>
           </div>
 
-          {/* Product Details */}
-          <div className='grid md:grid-cols-2 gap-6'>
+          <div className='grid sm:grid-cols-2 gap-4 sm:gap-6'>
             <div>
               <label className='block text-sm font-semibold text-gray-700 mb-2'>Product Name</label>
               <input 
                 onChange={(e) => setName(e.target.value)} 
                 value={name} 
-                className='w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-500 focus:outline-none transition-colors duration-200' 
+                className='w-full px-3 sm:px-4 py-2 sm:py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-500 focus:outline-none transition-colors duration-200 text-sm sm:text-base' 
                 type="text" 
                 placeholder='Enter product name' 
                 required 
@@ -128,7 +126,7 @@ const Add = ({token}) => {
               <input 
                 onChange={(e) => setPrice(e.target.value)} 
                 value={price} 
-                className='w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-500 focus:outline-none transition-colors duration-200' 
+                className='w-full px-3 sm:px-4 py-2 sm:py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-500 focus:outline-none transition-colors duration-200 text-sm sm:text-base' 
                 type="number" 
                 placeholder='Enter price' 
                 required 
@@ -141,21 +139,20 @@ const Add = ({token}) => {
             <textarea 
               onChange={(e) => setDescription(e.target.value)} 
               value={description} 
-              className='w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-500 focus:outline-none transition-colors duration-200 resize-none' 
+              className='w-full px-3 sm:px-4 py-2 sm:py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-500 focus:outline-none transition-colors duration-200 resize-none text-sm sm:text-base' 
               placeholder='Write product description' 
               rows={4} 
               required 
             />
           </div>
 
-          {/* Category and Subcategory */}
-          <div className='grid md:grid-cols-2 gap-6'>
+          <div className='grid sm:grid-cols-2 gap-4 sm:gap-6'>
             <div>
               <label className='block text-sm font-semibold text-gray-700 mb-2'>Category</label>
               <select 
                 onChange={(e) => setCategory(e.target.value)} 
                 value={category}
-                className='w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-500 focus:outline-none transition-colors duration-200'
+                className='w-full px-3 sm:px-4 py-2 sm:py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-500 focus:outline-none transition-colors duration-200 text-sm sm:text-base'
               >
                 <option value="Men">Men</option>
                 <option value="Women">Women</option>
@@ -168,19 +165,19 @@ const Add = ({token}) => {
               <select 
                 onChange={(e) => setSubCategory(e.target.value)} 
                 value={subCategory}
-                className='w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-500 focus:outline-none transition-colors duration-200'
+                className='w-full px-3 sm:px-4 py-2 sm:py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-500 focus:outline-none transition-colors duration-200 text-sm sm:text-base'
               >
                 <option value="Topwear">Topwear</option>
                 <option value="Bottomwear">Bottomwear</option>
                 <option value="Winterwear">Winterwear</option>
+                <option value="Ethnic Wear">Ethnic Wear</option>
               </select>
             </div>
           </div>
 
-          {/* Sizes */}
           <div>
             <label className='block text-sm font-semibold text-gray-700 mb-3'>Available Sizes</label>
-            <div className='flex flex-wrap gap-3'>
+            <div className='flex flex-wrap gap-2 sm:gap-3'>
               {["S", "M", "L", "XL", "XXL"].map((size) => (
                 <div 
                   key={size}
@@ -189,7 +186,7 @@ const Add = ({token}) => {
                       ? prev.filter(item => item !== size)
                       : [...prev, size]
                   )}
-                  className={`px-4 py-2 border-2 rounded-lg cursor-pointer transition-all duration-200 ${
+                  className={`px-3 sm:px-4 py-2 border-2 rounded-lg cursor-pointer transition-all duration-200 text-sm sm:text-base ${
                     sizes.includes(size)
                       ? 'border-yellow-500 bg-yellow-100 text-yellow-700'
                       : 'border-gray-200 hover:border-yellow-300 hover:bg-yellow-50'
@@ -201,14 +198,13 @@ const Add = ({token}) => {
             </div>
           </div>
 
-          {/* Bestseller */}
           <div className='flex items-center gap-3'>
             <input 
               onChange={() => setBestseller(prev => !prev)} 
               checked={bestseller} 
               type="checkbox" 
               id="bestseller"
-              className='w-5 h-5 text-yellow-600 border-2 border-gray-300 rounded focus:ring-yellow-500'
+              className='w-4 h-4 sm:w-5 sm:h-5 text-yellow-600 border-2 border-gray-300 rounded focus:ring-yellow-500'
             />
             <label htmlFor="bestseller" className='text-sm font-medium text-gray-700 cursor-pointer'>
               Add to bestseller
@@ -217,7 +213,7 @@ const Add = ({token}) => {
 
           <button 
             type='submit' 
-            className='w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white py-4 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95'
+            className='w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white py-3 sm:py-4 rounded-xl font-semibold text-base sm:text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95'
           >
             Add Product
           </button>
