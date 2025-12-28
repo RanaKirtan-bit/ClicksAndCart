@@ -20,7 +20,7 @@ const ShopContextProvider = (props) => {
 
       const addToCart = async (itemId, size) => {
 
-            if(!size) {
+            if(products.find(item => item._id === itemId)?.sizes && !size) {
                   toast.error('Select Product Size');
                   return;
             }

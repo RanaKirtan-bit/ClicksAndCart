@@ -75,23 +75,36 @@ const Product = () => {
               </div>
               
               <p className='text-gray-600 leading-relaxed mb-8 text-lg'>{productData.description}</p>
+              <p className='text-lg font-semibold text-gray-800 mb-4'>Remaining Stock:</p>
+              <p className='text-gray-600 leading-relaxed mb-8 text-lg'>
+  {productData.sizes
+    ? Object.values(productData.sizes).reduce((a, b) => a + b, 0)
+    : productData.totalStock}
+</p>
+
               
               <div className='mb-8'>
                 <p className='text-lg font-semibold text-gray-800 mb-4'>Select Size</p>
                 <div className='flex gap-3 flex-wrap'>
-                  {productData.sizes.map((item, index)=>(
-                    <button 
-                      onClick={()=>setSize(item)} 
-                      key={index} 
-                      className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
-                        item===size 
-                          ? 'bg-yellow-500 text-white shadow-lg scale-105' 
-                          : 'bg-gray-100 text-gray-700 hover:bg-yellow-100 hover:text-yellow-700 hover:scale-105'
-                      }`}
-                    > 
-                      {item} 
-                    </button>
-                  ))}
+                  {productData.sizes && Object.entries(productData.sizes).map(
+  ([sizeKey, qty]) => (
+    <button
+      key={sizeKey}
+      disabled={qty <= 0}
+      onClick={() => setSize(sizeKey)}
+      className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
+        size === sizeKey
+          ? 'bg-yellow-500 text-white shadow-lg scale-105'
+          : qty <= 0
+            ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+            : 'bg-gray-100 text-gray-700 hover:bg-yellow-100 hover:text-yellow-700 hover:scale-105'
+      }`}
+    >
+      {sizeKey}
+    </button>
+  )
+)}
+
                 </div>
               </div>
               
@@ -102,6 +115,7 @@ const Product = () => {
                     navigate('/login')
                     return
                   }
+                  
                   addToCart(productData._id, size)
                 }} 
                 className='w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white py-4 px-8 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 mb-8'

@@ -16,8 +16,7 @@ const Add = ({token}) => {
   const [category, setCategory] = useState("Men")
   const [subCategory, setSubCategory] = useState("Topwear")
   const [bestseller, setBestseller] = useState(false)
-  const [sizes, setSizes] = useState([])
-  const [stock, setStock] = useState(0); // Added state for stock
+  const [sizes, setSizes] = useState({})
 
   const onSubmitHandler = async (e) => {
     e.preventDefault()
@@ -32,7 +31,6 @@ const Add = ({token}) => {
       formData.append("subCategory", subCategory)
       formData.append("bestseller", bestseller)
       formData.append("sizes", JSON.stringify(sizes))
-      formData.append("stock", stock); // Added stock to form data
       
       image1 && formData.append("image1", image1)
       image2 && formData.append("image2", image2)
@@ -50,8 +48,7 @@ const Add = ({token}) => {
         setImage3(false)
         setImage4(false)
         setPrice('')
-        setSizes([])
-        setStock(0); // Reset stock state
+        setSizes({})
       } else {
         toast.error(response.data.message)
       }
@@ -182,26 +179,29 @@ const Add = ({token}) => {
             <label className='block text-sm font-semibold text-gray-700 mb-3'>Available Sizes</label>
             <div className='flex flex-wrap gap-2 sm:gap-3'>
               {["S", "M", "L", "XL", "XXL"].map((size) => (
-                <div 
-                  key={size}
-                  onClick={() => setSizes(prev => 
-                    prev.includes(size) 
-                      ? prev.filter(item => item !== size)
-                      : [...prev, size]
-                  )}
-                  className={`px-3 sm:px-4 py-2 border-2 rounded-lg cursor-pointer transition-all duration-200 text-sm sm:text-base ${
-                    sizes.includes(size)
-                      ? 'border-yellow-500 bg-yellow-100 text-yellow-700'
-                      : 'border-gray-200 hover:border-yellow-300 hover:bg-yellow-50'
-                  }`}
-                >
-                  {size}
-                </div>
-              ))}
+    <div key={size} className="flex items-center gap-4 mb-2">
+      
+      <span className="w-10 font-medium">{size}</span>
+
+      <input
+        type="number"
+        min="0"
+        placeholder="Qty"
+        className="px-3 py-2 border-2 border-gray-200 rounded-lg w-32"
+        value={sizes[size] || ""}
+        onChange={(e) =>
+          setSizes(prev => ({
+            ...prev,
+            [size]: Number(e.target.value)
+          }))
+        }
+      />
+    </div>
+  ))}
             </div>
           </div>
 
-          <div>
+          {/* <div>
             <label className='block text-sm font-semibold text-gray-700 mb-2'>Stock</label>
             <input 
               onChange={(e) => setStock(e.target.value)} 
@@ -211,7 +211,7 @@ const Add = ({token}) => {
               placeholder='Enter initial stock' 
               required 
             />
-          </div>
+          </div> */}
 
           <div className='flex items-center gap-3'>
             <input 

@@ -75,7 +75,6 @@ const InventoryManagement = ({ token }) => {
     <div className="max-w-full sm:max-w-7xl mx-auto p-4 sm:p-6">
       <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6 lg:p-8">
 
-        {/* Header */}
         <div className="mb-6 sm:mb-8">
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">
             Inventory Management
@@ -86,7 +85,6 @@ const InventoryManagement = ({ token }) => {
           </p>
         </div>
 
-        {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
           <div className="bg-linear-to-r from-blue-50 to-blue-100 p-4 rounded-xl border border-blue-200">
             <h3 className="text-sm font-semibold text-blue-800">Total Products</h3>
@@ -104,7 +102,6 @@ const InventoryManagement = ({ token }) => {
           </div>
         </div>
 
-        {/* Table */}
         <div className="overflow-x-auto">
           <table className="w-full border-collapse">
             <thead>

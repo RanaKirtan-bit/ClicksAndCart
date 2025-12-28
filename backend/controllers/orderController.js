@@ -1,78 +1,147 @@
-import orderModel from '../models/orderModel.js';
-import userModel from '../models/userModel.js';
-import productModel from '../models/productModel.js'; // Import product model
-import { notifyAdmin } from '../utils/notifications.js'; // Import notification utility
+import orderModel from '../models/orderModel.js'
+import userModel from '../models/userModel.js'
+import productModel from '../models/productModel.js'
+import notificationModel from '../models/notificationModel.js'
+import mongoose from 'mongoose'
+
+
+const getNotifications = async (req, res) => {
+  try {
+    const notifications = await notificationModel
+      .find({ seen: false })
+      .sort({ createdAt: -1 })
+
+    res.json({ success: true, notifications })
+  } catch (error) {
+    res.json({ success: false, message: error.message })
+  }
+}
+
 
 const placeOrder = async (req, res) => {
-  try {
-    const { userId, items, amount, address } = req.body;
+  const session = await mongoose.startSession()
+  session.startTransaction()
 
-    const orderData = {
+  try {
+    const { items, amount, address } = req.body
+    const userId = req.userId; // ✅ from auth middleware
+
+    for (const item of items) {
+      const product = await productModel
+        .findById(item._id)
+        .session(session)
+
+      if (!product) {
+        throw new Error('Product not found')
+      }
+
+      // 🟢 SIZE-WISE PRODUCT
+      if (product.sizes && product.sizes.size > 0 && item.size) {
+        const currentQty = product.sizes.get(item.size) || 0
+
+        if (currentQty < item.quantity) {
+          throw new Error(`Out of stock for size ${item.size}`)
+        }
+
+        product.sizes.set(item.size, currentQty - item.quantity)
+      }
+      // 🔵 NON-SIZE PRODUCT
+      else {
+        if (product.totalStock < item.quantity) {
+          throw new Error('Product out of stock')
+        }
+
+        product.totalStock -= item.quantity
+      }
+
+      // 🔔 LOW STOCK CHECK
+      let lowStock = false
+
+      if (product.sizes && product.sizes.size > 0) {
+        lowStock = [...product.sizes.values()].some(qty => qty < 5)
+      } else {
+        lowStock = product.totalStock < 5
+      }
+
+      if (lowStock) {
+        const alreadyNotified = await notificationModel.findOne({
+          productId: product._id,
+          seen: false
+        }).session(session)
+
+        if (!alreadyNotified) {
+          await notificationModel.create([{
+            productId: product._id,
+            message: `${product.name} stock is running low`
+          }], { session })
+        }
+      }
+
+      await product.save({ session })
+    }
+
+    // 🧾 SAVE ORDER
+    await orderModel.create([{
       userId,
       items,
       address,
       amount,
-      paymentMethod: 'COD',
+      paymentMethod: "COD",
       payment: false,
-      date: Date.now(),
-    };
+      date: Date.now()
+    }], { session })
 
-    const newOrder = new orderModel(orderData);
-    await newOrder.save();
+    // 🧹 CLEAR CART
+    await userModel.findByIdAndUpdate(
+      userId,
+      { cartData: {} },
+      { session }
+    )
 
-    await userModel.findByIdAndUpdate(userId, { cartData: {} });
+    await session.commitTransaction()
+    session.endSession()
 
-    // Decrement stock for each item
-    for (const item of items) {
-      const product = await productModel.findById(item.productId);
-      if (product) {
-        product.stock -= item.quantity;
-        await product.save();
+    res.json({ success: true, message: "Order Placed Successfully" })
 
-        // Notify admin if stock is low
-        if (product.stock <= 5) {
-          await notifyAdmin(`Low stock alert: Product ${product.name} has only ${product.stock} items left.`);
-        }
-      }
-    }
-
-    res.json({ success: true, message: 'Order Placed' });
   } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: error.message });
+    await session.abortTransaction()
+    session.endSession()
+
+    console.log(error)
+    res.json({ success: false, message: error.message })
   }
-};
+}
 
 const userOrders = async (req, res) => {
-  try {
-    const { userId } = req.body;
-    const orders = await orderModel.find({ userId });
-    res.json({ success: true, orders });
-  } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: error.message });
-  }
-};
+    try {
+        const { userId } = req.userId
+        const orders = await orderModel.find({ userId })
+        res.json({success: true, orders})
+    } catch (error) {
+        console.log(error)
+        res.json({success: false, message: error.message})
+    }
+}
 
 const listOrders = async (req, res) => {
-  try {
-    const orders = await orderModel.find({});
-    res.json({ success: true, orders });
-  } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: error.message });
-  }
-};
+    try {
+        const orders = await orderModel.find({})
+        res.json({success: true, orders})
+    } catch (error) {
+        console.log(error)
+        res.json({success: false, message: error.message})
+    }
+}
 
 const updateStatus = async (req, res) => {
-  try {
-    const { orderId, status } = req.body;
-    await orderModel.findByIdAndUpdate(orderId, { status });
-    res.json({ success: true, message: 'Status Updated' });
-  } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: error.message });
-  }
-};
+    try {
+        const { orderId, status } = req.body
+        await orderModel.findByIdAndUpdate(orderId, { status })
+        res.json({success: true, message: 'Status Updated'})
+    } catch (error) {
+        console.log(error)
+        res.json({success: false, message: error.message})
+    }
+}
 
-export { placeOrder, userOrders, listOrders, updateStatus };
+export { placeOrder, userOrders, listOrders, updateStatus, getNotifications }
