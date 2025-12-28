@@ -92,6 +92,30 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               <p className="text-xs opacity-75 truncate">Manage customer orders</p>
             </div>
           </NavLink>
+
+          <NavLink
+            to="/inventory"
+            onClick={() => setSidebarOpen(false)}
+            className={({ isActive }) =>
+              `flex items-center gap-3 px-3 lg:px-4 py-3 rounded-xl transition-all duration-300 hover:bg-green-50 group ${
+                isActive 
+                  ? "bg-gradient-to-r from-green-100 to-green-50 border-l-4 border-green-500 text-green-700 shadow-sm" 
+                  : "text-gray-600 hover:text-green-600"
+              }`
+            }
+          >
+            <div className={`p-2 rounded-lg transition-colors duration-300 ${
+              window.location.pathname === '/inventory'
+                ? "bg-green-200" 
+                : "bg-gray-100 group-hover:bg-green-100"
+            }`}>
+              <img src={assets.order_icon} alt="" className="w-4 h-4 lg:w-5 lg:h-5" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="font-medium text-sm lg:text-base truncate">Inventory</p>
+              <p className="text-xs opacity-75 truncate">Manage product inventory</p>
+            </div>
+          </NavLink>
         </div>
       </div>
     </>

@@ -17,6 +17,7 @@ const Add = ({token}) => {
   const [subCategory, setSubCategory] = useState("Topwear")
   const [bestseller, setBestseller] = useState(false)
   const [sizes, setSizes] = useState([])
+  const [stock, setStock] = useState(0); // Added state for stock
 
   const onSubmitHandler = async (e) => {
     e.preventDefault()
@@ -31,6 +32,7 @@ const Add = ({token}) => {
       formData.append("subCategory", subCategory)
       formData.append("bestseller", bestseller)
       formData.append("sizes", JSON.stringify(sizes))
+      formData.append("stock", stock); // Added stock to form data
       
       image1 && formData.append("image1", image1)
       image2 && formData.append("image2", image2)
@@ -49,6 +51,7 @@ const Add = ({token}) => {
         setImage4(false)
         setPrice('')
         setSizes([])
+        setStock(0); // Reset stock state
       } else {
         toast.error(response.data.message)
       }
@@ -64,7 +67,7 @@ const Add = ({token}) => {
       <div className='bg-white rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6 lg:p-8'>
         <div className='mb-6 sm:mb-8'>
           <h1 className='text-2xl sm:text-3xl font-bold text-gray-800 mb-2'>Add New Product</h1>
-          <div className='w-16 sm:w-20 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full'></div>
+          <div className='w-16 sm:w-20 h-1 bg-linear-to-r from-yellow-400 to-yellow-600 rounded-full'></div>
           <p className='text-gray-600 mt-3 text-sm sm:text-base'>Fill in the details below to add a new product to your store</p>
         </div>
 
@@ -198,6 +201,18 @@ const Add = ({token}) => {
             </div>
           </div>
 
+          <div>
+            <label className='block text-sm font-semibold text-gray-700 mb-2'>Stock</label>
+            <input 
+              onChange={(e) => setStock(e.target.value)} 
+              value={stock} 
+              className='w-full px-3 sm:px-4 py-2 sm:py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-500 focus:outline-none transition-colors duration-200 text-sm sm:text-base' 
+              type="number" 
+              placeholder='Enter initial stock' 
+              required 
+            />
+          </div>
+
           <div className='flex items-center gap-3'>
             <input 
               onChange={() => setBestseller(prev => !prev)} 
@@ -213,7 +228,7 @@ const Add = ({token}) => {
 
           <button 
             type='submit' 
-            className='w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white py-3 sm:py-4 rounded-xl font-semibold text-base sm:text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95'
+            className='w-full bg-linear-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white py-3 sm:py-4 rounded-xl font-semibold text-base sm:text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95'
           >
             Add Product
           </button>
