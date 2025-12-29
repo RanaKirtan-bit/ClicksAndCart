@@ -1,5 +1,6 @@
 import {v2 as cloudinary} from 'cloudinary'
 import productModel from '../models/productModel.js'
+import { checkStockAndNotify } from './notificationController.js'
 
 const addProduct = async ( req, res ) => {
       try {
@@ -18,6 +19,7 @@ const addProduct = async ( req, res ) => {
             })
          )
 
+         const parsedSizes = JSON.parse(sizes);
          const productData = {
             name,
             description,
@@ -25,13 +27,13 @@ const addProduct = async ( req, res ) => {
             price: Number(price),
             subCategory,
             bestseller: bestseller === "true" ? true : false,
-            sizes: JSON.parse(sizes),
+            sizes: parsedSizes.map(item => ({ size: item.size, stock: Number(item.stock) })),
             images: imagesUrl
          }
 
          const product = new productModel(productData)
          await product.save()
-
+         await checkStockAndNotify()
          res.json({success:true, message:"Product Added"})
          
       } catch (error) {
@@ -71,4 +73,26 @@ const singleProduct = async ( req, res ) => {
       }
 }
 
-export { listProduct, addProduct, removeProduct, singleProduct }
+const updateStock = async (req, res) => {
+    try {
+        const { productId, sizes } = req.body;
+        const product = await productModel.findById(productId);
+        if (!product) {
+            return res.json({ success: false, message: "Product not found" });
+        }
+        sizes.forEach(item => {
+            const sizeIndex = product.sizes.findIndex(s => s.size === item.size);
+            if (sizeIndex > -1) {
+                product.sizes[sizeIndex].stock = Number(item.stock);
+            }
+        });
+        await product.save();
+        await checkStockAndNotify();
+        res.json({ success: true, message: "Stock updated" });
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+}
+
+export { listProduct, addProduct, removeProduct, singleProduct, updateStock }

@@ -50,15 +50,15 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             onClick={() => setSidebarOpen(false)}
             className={({ isActive }) =>
               `flex items-center gap-3 px-3 lg:px-4 py-3 rounded-xl transition-all duration-300 hover:bg-blue-50 group ${
-                isActive 
-                  ? "bg-gradient-to-r from-blue-100 to-blue-50 border-l-4 border-blue-500 text-blue-700 shadow-sm" 
+                isActive
+                  ? "bg-gradient-to-r from-blue-100 to-blue-50 border-l-4 border-blue-500 text-blue-700 shadow-sm"
                   : "text-gray-600 hover:text-blue-600"
               }`
             }
           >
             <div className={`p-2 rounded-lg transition-colors duration-300 ${
               window.location.pathname === '/list'
-                ? "bg-blue-200" 
+                ? "bg-blue-200"
                 : "bg-gray-100 group-hover:bg-blue-100"
             }`}>
               <img src={assets.order_icon} alt="" className="w-4 h-4 lg:w-5 lg:h-5" />
@@ -73,17 +73,17 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             to="/orders"
             onClick={() => setSidebarOpen(false)}
             className={({ isActive }) =>
-              `flex items-center gap-3 px-3 lg:px-4 py-3 rounded-xl transition-all duration-300 hover:bg-green-50 group ${
-                isActive 
-                  ? "bg-gradient-to-r from-green-100 to-green-50 border-l-4 border-green-500 text-green-700 shadow-sm" 
-                  : "text-gray-600 hover:text-green-600"
+              `flex items-center gap-3 px-3 lg:px-4 py-3 rounded-xl transition-all duration-300 hover:bg-purple-50 group ${
+                isActive
+                  ? "bg-gradient-to-r from-purple-100 to-purple-50 border-l-4 border-purple-500 text-purple-700 shadow-sm"
+                  : "text-gray-600 hover:text-purple-600"
               }`
             }
           >
             <div className={`p-2 rounded-lg transition-colors duration-300 ${
               window.location.pathname === '/orders'
-                ? "bg-green-200" 
-                : "bg-gray-100 group-hover:bg-green-100"
+                ? "bg-purple-200"
+                : "bg-gray-100 group-hover:bg-purple-100"
             }`}>
               <img src={assets.order_icon} alt="" className="w-4 h-4 lg:w-5 lg:h-5" />
             </div>

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { backendUrl } from '../App'
 import { toast } from 'react-toastify'
 
 const List = ({token}) => {
+  const navigate = useNavigate()
   const [list, setList] = useState([])
   const [filteredList, setFilteredList] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
@@ -196,22 +198,32 @@ const List = ({token}) => {
                     </div>
                   </div>
                   
-                  <div className='flex justify-between items-center'>
-                    <div className='flex gap-1 flex-wrap'>
-                      {item.sizes && item.sizes.slice(0, 3).map((size, idx) => (
-                        <span key={idx} className='px-2 py-1 bg-blue-100 text-blue-600 text-xs rounded'>
-                          {size}
+                  <div className='border-t border-gray-200 pt-3 mt-3'>
+                    <h4 className='text-xs font-semibold text-gray-500 mb-2'>Sizes & Stock</h4>
+                    <div className='flex gap-2 flex-wrap'>
+                      {item.sizes && item.sizes.map((size, idx) => (
+                        <span key={idx} className='px-2 py-1 bg-blue-100 text-blue-600 text-xs rounded font-medium'>
+                          {size.size}: <span className='font-bold'>{size.stock}</span>
                         </span>
                       ))}
-                      {item.sizes && item.sizes.length > 3 && (
-                        <span className='px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded'>
-                          +{item.sizes.length - 3}
-                        </span>
-                      )}
                     </div>
-                    <span className='text-xs text-gray-500 hidden sm:block'>
+                  </div>
+                  <div className='flex justify-between items-center mt-3'>
+                    <div className='text-sm font-bold text-gray-700'>
+                      Total Stock: {item.sizes.reduce((acc, size) => acc + size.stock, 0)}
+                    </div>
+                    <span className='text-xs text-gray-500'>
                       {item.createdAt ? new Date(item.createdAt).toLocaleDateString() : 'N/A'}
                     </span>
+                  </div>
+
+                  <div className='flex gap-2 mt-3'>
+                    <button
+                      onClick={() => navigate(`/update-stock?id=${item._id}`)}
+                      className='flex-1 bg-green-500 hover:bg-green-600 text-white py-2 px-3 rounded-lg text-xs font-semibold transition-colors duration-200'
+                    >
+                      Update Stock
+                    </button>
                   </div>
                 </div>
               </div>

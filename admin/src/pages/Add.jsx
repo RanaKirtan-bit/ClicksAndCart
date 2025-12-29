@@ -18,6 +18,21 @@ const Add = ({token}) => {
   const [bestseller, setBestseller] = useState(false)
   const [sizes, setSizes] = useState([])
 
+  const handleSizeChange = (size) => {
+    setSizes(prev => {
+      const isSizePresent = prev.some(item => item.size === size);
+      if (isSizePresent) {
+        return prev.filter(item => item.size !== size);
+      } else {
+        return [...prev, { size, stock: 0 }];
+      }
+    });
+  };
+
+  const handleStockChange = (size, stock) => {
+    setSizes(prev => prev.map(item => item.size === size ? { ...item, stock } : item));
+  };
+
   const onSubmitHandler = async (e) => {
     e.preventDefault()
     
@@ -49,6 +64,7 @@ const Add = ({token}) => {
         setImage4(false)
         setPrice('')
         setSizes([])
+        setBestseller(false)
       } else {
         toast.error(response.data.message)
       }
@@ -176,25 +192,34 @@ const Add = ({token}) => {
           </div>
 
           <div>
-            <label className='block text-sm font-semibold text-gray-700 mb-3'>Available Sizes</label>
-            <div className='flex flex-wrap gap-2 sm:gap-3'>
-              {["S", "M", "L", "XL", "XXL"].map((size) => (
-                <div 
-                  key={size}
-                  onClick={() => setSizes(prev => 
-                    prev.includes(size) 
-                      ? prev.filter(item => item !== size)
-                      : [...prev, size]
-                  )}
-                  className={`px-3 sm:px-4 py-2 border-2 rounded-lg cursor-pointer transition-all duration-200 text-sm sm:text-base ${
-                    sizes.includes(size)
-                      ? 'border-yellow-500 bg-yellow-100 text-yellow-700'
-                      : 'border-gray-200 hover:border-yellow-300 hover:bg-yellow-50'
-                  }`}
-                >
-                  {size}
-                </div>
-              ))}
+            <label className='block text-sm font-semibold text-gray-700 mb-3'>Available Sizes & Stock</label>
+            <div className='flex flex-wrap gap-4'>
+              {["S", "M", "L", "XL", "XXL"].map((size) => {
+                const sizeData = sizes.find(item => item.size === size);
+                return (
+                  <div key={size} className='flex flex-col gap-2'>
+                    <div
+                      onClick={() => handleSizeChange(size)}
+                      className={`px-3 sm:px-4 py-2 border-2 rounded-lg cursor-pointer transition-all duration-200 text-sm sm:text-base ${
+                        sizeData
+                          ? 'border-yellow-500 bg-yellow-100 text-yellow-700'
+                          : 'border-gray-200 hover:border-yellow-300 hover:bg-yellow-50'
+                      }`}
+                    >
+                      {size}
+                    </div>
+                    {sizeData && (
+                      <input
+                        type="number"
+                        placeholder="Stock"
+                        value={sizeData.stock}
+                        onChange={(e) => handleStockChange(size, e.target.value)}
+                        className='w-full px-3 py-2 border-2 border-gray-200 rounded-xl focus:border-yellow-500 focus:outline-none transition-colors duration-200 text-sm'
+                      />
+                    )}
+                  </div>
+                )
+              })}
             </div>
           </div>
 

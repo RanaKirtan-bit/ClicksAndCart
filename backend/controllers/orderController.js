@@ -1,9 +1,26 @@
 import orderModel from '../models/orderModel.js'
 import userModel from '../models/userModel.js'
+import productModel from '../models/productModel.js'
+import { checkStockAndNotify } from './notificationController.js'
 
 const placeOrder = async (req, res) => {
     try {
         const { userId, items, amount, address } = req.body
+
+        for (const item of items) {
+            const product = await productModel.findById(item._id)
+            const sizeData = product.sizes.find(s => s.size === item.size)
+            if (!sizeData || sizeData.stock < item.quantity) {
+                return res.json({ success: false, message: "Not enough stock for " + item.name })
+            }
+        }
+
+        for (const item of items) {
+            const product = await productModel.findById(item._id)
+            const sizeData = product.sizes.find(s => s.size === item.size)
+            sizeData.stock -= item.quantity
+            await product.save()
+        }
         
         const orderData = {
             userId,
@@ -19,6 +36,7 @@ const placeOrder = async (req, res) => {
         await newOrder.save()
         
         await userModel.findByIdAndUpdate(userId, {cartData: {}})
+        await checkStockAndNotify()
         
         res.json({success: true, message: "Order Placed"})
         

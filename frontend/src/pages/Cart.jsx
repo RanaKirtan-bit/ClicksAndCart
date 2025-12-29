@@ -3,6 +3,7 @@ import { ShopContext } from '../context/ShopContext'
 import Title from '../components/Title'
 import { assets } from '../assets/assets/frontend_assets/assets';
 import CartTotal from '../components/CartTotal';
+import { toast } from 'react-toastify';
 
 const Cart = () => {
   const {products, currency, cartItems, updateQuantity, navigate} = useContext(ShopContext);
@@ -114,8 +115,18 @@ const Cart = () => {
               <div className='w-full md:w-[500px]'>
                 <div className='bg-white rounded-2xl p-8 shadow-lg border border-gray-100'>
                   <CartTotal />
-                  <button 
-                    onClick={() => navigate('/place-order')} 
+                  <button
+                    onClick={() => {
+                      for (const item of cartData) {
+                        const productData = products.find((product) => product._id === item._id);
+                        const sizeData = productData.sizes.find(s => s.size === item.size);
+                        if (sizeData.stock < item.quantity) {
+                          toast.error(`Not enough stock for ${productData.name}`);
+                          return;
+                        }
+                      }
+                      navigate('/place-order');
+                    }}
                     className='w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white py-4 px-8 rounded-xl font-semibold text-lg mt-8 transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95'
                   >
                     PROCEED TO CHECKOUT
