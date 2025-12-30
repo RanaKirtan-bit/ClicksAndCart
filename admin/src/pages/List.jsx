@@ -16,16 +16,12 @@ const List = ({token}) => {
     try {
       const response = await axios.get(backendUrl + "/api/product/list")
       if (response.data.success) {
-        console.log('Full product data:', response.data.products[0])
-        console.log('Image array:', response.data.products[0]?.images)
-        console.log('First image URL:', response.data.products[0]?.images?.[0])
         setList(response.data.products.reverse())
         setFilteredList(response.data.products.reverse())
       } else {
         toast.error(response.data.message)
       }
     } catch (error) {
-      console.log(error)
       toast.error(error.message)
     } finally {
       setLoading(false)
@@ -69,7 +65,7 @@ const List = ({token}) => {
 
   if (loading) {
     return (
-      <div className='flex items-center justify-center min-h-[400px]'>
+      <div className='flex items-center justify-center min-h-100'>
         <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-600'></div>
       </div>
     )
@@ -80,7 +76,7 @@ const List = ({token}) => {
       <div className='bg-white rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6 lg:p-8'>
         <div className='mb-6 sm:mb-8'>
           <h1 className='text-2xl sm:text-3xl font-bold text-gray-800 mb-2'>Product Management</h1>
-          <div className='w-16 sm:w-20 h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full'></div>
+          <div className='w-16 sm:w-20 h-1 bg-linear-to-r from-blue-400 to-blue-600 rounded-full'></div>
           <p className='text-gray-600 mt-3 text-sm sm:text-base'>Manage your store products - view, search, and remove items</p>
         </div>
 
@@ -107,15 +103,15 @@ const List = ({token}) => {
         </div>
 
         <div className='grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8'>
-          <div className='bg-gradient-to-r from-blue-50 to-blue-100 p-3 sm:p-4 rounded-xl border border-blue-200'>
+          <div className='bg-linear-to-r from-blue-50 to-blue-100 p-3 sm:p-4 rounded-xl border border-blue-200'>
             <h3 className='text-sm sm:text-lg font-semibold text-blue-800'>Total Products</h3>
             <p className='text-xl sm:text-2xl font-bold text-blue-600'>{list.length}</p>
           </div>
-          <div className='bg-gradient-to-r from-green-50 to-green-100 p-3 sm:p-4 rounded-xl border border-green-200'>
+          <div className='bg-linear-to-r from-green-50 to-green-100 p-3 sm:p-4 rounded-xl border border-green-200'>
             <h3 className='text-sm sm:text-lg font-semibold text-green-800'>Bestsellers</h3>
             <p className='text-xl sm:text-2xl font-bold text-green-600'>{list.filter(item => item.bestseller).length}</p>
           </div>
-          <div className='bg-gradient-to-r from-purple-50 to-purple-100 p-3 sm:p-4 rounded-xl border border-purple-200'>
+          <div className='bg-linear-to-r from-purple-50 to-purple-100 p-3 sm:p-4 rounded-xl border border-purple-200'>
             <h3 className='text-sm sm:text-lg font-semibold text-purple-800'>Filtered Results</h3>
             <p className='text-xl sm:text-2xl font-bold text-purple-600'>{filteredList.length}</p>
           </div>
@@ -223,6 +219,12 @@ const List = ({token}) => {
                       className='flex-1 bg-green-500 hover:bg-green-600 text-white py-2 px-3 rounded-lg text-xs font-semibold transition-colors duration-200'
                     >
                       Update Stock
+                    </button>
+                    <button
+                      onClick={() => navigate(`/update-product?id=${item._id}`)}
+                      className='flex-1 bg-green-500 hover:bg-green-600 text-white py-2 px-3 rounded-lg text-xs font-semibold transition-colors duration-200'
+                    >
+                      Update Product
                     </button>
                   </div>
                 </div>

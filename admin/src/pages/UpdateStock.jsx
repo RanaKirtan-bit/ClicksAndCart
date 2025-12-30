@@ -52,7 +52,7 @@ const UpdateStock = ({ token }) => {
 
       if (response.data.success) {
         toast.success(response.data.message)
-        fetchProduct() // Refresh data
+        fetchProduct() 
       } else {
         toast.error(response.data.message)
       }
@@ -66,7 +66,7 @@ const UpdateStock = ({ token }) => {
 
   if (loading) {
     return (
-      <div className='flex items-center justify-center min-h-[400px]'>
+      <div className='flex items-center justify-center min-h-100'>
         <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-600'></div>
       </div>
     )
@@ -89,7 +89,7 @@ const UpdateStock = ({ token }) => {
       <div className='bg-white rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6 lg:p-8'>
         <div className='mb-6 sm:mb-8'>
           <h1 className='text-2xl sm:text-3xl font-bold text-gray-800 mb-2'>Update Stock</h1>
-          <div className='w-16 sm:w-20 h-1 bg-gradient-to-r from-green-400 to-green-600 rounded-full'></div>
+          <div className='w-16 sm:w-20 h-1 bg-linear-to-r from-green-400 to-green-600 rounded-full'></div>
           <p className='text-gray-600 mt-3 text-sm sm:text-base'>Update stock levels for {product.name}</p>
         </div>
 
@@ -128,7 +128,7 @@ const UpdateStock = ({ token }) => {
             <button
               type='submit'
               disabled={updating}
-              className='flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed'
+              className='flex-1 bg-linear-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed'
             >
               {updating ? (
                 <div className='flex items-center justify-center gap-2'>

@@ -39,21 +39,21 @@ const Hero = () => {
   }, [])
 
   return (
-    <div className='relative overflow-hidden bg-gradient-to-r from-gray-50 to-white'>
+    <div className='relative overflow-hidden bg-linear-to-r from-gray-50 to-white'>
       
       <div 
         className='flex transition-transform duration-700 ease-in-out'
         style={{ transform: `translateX(-${currentBanner * 100}%)` }}
       >
         {banners.map((banner, index) => (
-          <div key={banner.id} className={`min-w-full flex flex-col sm:flex-row bg-gradient-to-r ${banner.bgGradient}`}>
+          <div key={banner.id} className={`min-w-full flex flex-col sm:flex-row bg-linear-to-r ${banner.bgGradient}`}>
             <div className='w-full sm:w-1/2 flex items-center justify-center py-16 sm:py-20 px-8'>
               <div className='text-[#414141] max-w-md'>
                 <div className='flex items-center gap-2 mb-4'>
-                  <div className='w-8 md:w-12 h-[2px] bg-gradient-to-r from-[#414141] to-gray-300 animate-pulse'></div>
+                  <div className='w-8 md:w-12 h-[2px] bg-linear-to-r from-[#414141] to-gray-300 animate-pulse'></div>
                   <p className='font-medium text-sm md:text-base tracking-wider opacity-80'>{banner.subtitle}</p>
                 </div>
-                <h1 className='text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent'>
+                <h1 className='text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6 bg-linear-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent'>
                   {banner.title}
                 </h1>
                 <div className='flex items-center gap-3 group cursor-pointer'>

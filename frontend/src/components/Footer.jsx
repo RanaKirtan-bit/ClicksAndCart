@@ -3,7 +3,7 @@ import { assets } from '../assets/assets/frontend_assets/assets'
 
 const Footer = () => {
   return (
-    <footer className='bg-gradient-to-b from-yellow-50 to-white border-t border-gray-200 mt-20'>
+    <footer className='bg-linear-to-b from-yellow-50 to-white border-t border-gray-200 mt-20'>
       <div className='max-w-6xl mx-auto px-4 py-12'>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
           
@@ -81,7 +81,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className='border-t border-gray-300 bg-gradient-to-r from-yellow-100 to-white'>
+      <div className='border-t border-gray-300 bg-linear-to-r from-yellow-100 to-white'>
         <div className='max-w-6xl mx-auto px-4 py-4'>
           <div className='flex flex-col md:flex-row justify-between items-center gap-4'>
             <p className='text-gray-600 text-sm'>

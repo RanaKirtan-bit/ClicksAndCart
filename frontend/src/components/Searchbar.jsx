@@ -7,7 +7,7 @@ const SearchBar = () => {
   const { search, showSearch, setSearch, setShowSearch } = useContext(ShopContext);    
 
   return showSearch ? (
-    <div className='border-t border-b bg-gradient-to-r from-yellow-50 to-white text-center py-8 shadow-sm'>
+    <div className='border-t border-b bg-linear-to-r from-yellow-50 to-white text-center py-8 shadow-sm'>
       <div className='max-w-2xl mx-auto px-4'>
         <div className='flex items-center justify-center mb-6'>
           <h2 className='text-xl font-semibold text-gray-800 mr-4'>Search Products</h2>

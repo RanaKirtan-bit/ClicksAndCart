@@ -5,14 +5,14 @@ import NewsletterBox from '../components/NewsletterBox'
 
 const Contact = () => {
   return (
-    <div className='bg-gradient-to-b from-yellow-50/30 to-white min-h-screen'>
+    <div className='bg-linear-to-b from-yellow-50/30 to-white min-h-screen'>
       <div className='border-t border-gray-200 pt-12 max-w-7xl mx-auto px-4'>
         
         <div className='text-center mb-16'>
           <div className='text-3xl md:text-4xl mb-4'>
             <Title text1={'CONTACT'} text2={'US'}/>
           </div>
-          <div className='w-24 h-1 bg-gradient-to-r from-yellow-500 to-yellow-600 mx-auto rounded-full'></div>
+          <div className='w-24 h-1 bg-linear-to-r from-yellow-500 to-yellow-600 mx-auto rounded-full'></div>
         </div>
 
         <div className='mb-20'>
@@ -27,7 +27,7 @@ const Contact = () => {
               </div>
               
               <div className='lg:w-1/2 space-y-8'>
-                <div className='bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-xl border border-blue-200'>
+                <div className='bg-linear-to-r from-blue-50 to-blue-100 p-6 rounded-xl border border-blue-200'>
                   <div className='flex items-center gap-3 mb-4'>
                     <div className='w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center'>
                       <svg className='w-5 h-5 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
@@ -56,7 +56,7 @@ const Contact = () => {
                   </div>
                 </div>
 
-                <div className='bg-gradient-to-r from-green-50 to-green-100 p-6 rounded-xl border border-green-200'>
+                <div className='bg-linear-to-r from-green-50 to-green-100 p-6 rounded-xl border border-green-200'>
                   <div className='flex items-center gap-3 mb-4'>
                     <div className='w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center'>
                       <svg className='w-5 h-5 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
@@ -69,12 +69,12 @@ const Contact = () => {
                     Join our dynamic team and be part of the fashion revolution. We're always looking 
                     for passionate individuals who share our vision.
                   </p>
-                  <button className='bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95'>
+                  <button className='bg-linear-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95'>
                     Explore Jobs
                   </button>
                 </div>
 
-                <div className='bg-gradient-to-r from-purple-50 to-purple-100 p-6 rounded-xl border border-purple-200'>
+                <div className='bg-linear-to-r from-purple-50 to-purple-100 p-6 rounded-xl border border-purple-200'>
                   <h3 className='text-xl font-bold text-gray-800 mb-4'>Quick Message</h3>
                   <div className='space-y-4'>
                     <input 
@@ -92,7 +92,7 @@ const Contact = () => {
                       rows={4}
                       className='w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-500 focus:outline-none transition-colors duration-200 resize-none'
                     ></textarea>
-                    <button className='w-full bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105'>
+                    <button className='w-full bg-linear-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105'>
                       Send Message
                     </button>
                   </div>

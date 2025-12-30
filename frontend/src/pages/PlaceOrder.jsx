@@ -36,7 +36,7 @@ const PlaceOrder = () => {
   }
 
   return (
-    <div className='bg-gradient-to-b from-yellow-50/30 to-white min-h-screen'>
+    <div className='bg-linear-to-b from-yellow-50/30 to-white min-h-screen'>
       <div className='border-t border-gray-200 pt-12 max-w-7xl mx-auto px-4'>
         <div className='flex flex-col lg:flex-row gap-12'>
           
@@ -46,7 +46,7 @@ const PlaceOrder = () => {
                 <div className='text-2xl md:text-3xl mb-4'>
                   <Title text1={'DELIVERY'} text2={'INFORMATION'}/>
                 </div>
-                <div className='w-24 h-1 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-full'></div>
+                <div className='w-24 h-1 bg-linear-to-r from-yellow-500 to-yellow-600 rounded-full'></div>
               </div>
               
               <form onSubmit={onSubmitHandler} className='space-y-6'>
@@ -144,7 +144,7 @@ const PlaceOrder = () => {
                 />
                 <button 
                 type='submit'
-                className='w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white py-4 px-8 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95'
+                className='w-full bg-linear-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white py-4 px-8 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95'
                 >
                 PLACE ORDER
               </button>
@@ -152,7 +152,7 @@ const PlaceOrder = () => {
             </div>
           </div>
 
-          <div className='lg:w-[450px]'>
+          <div className='lg:w-112.5'>
             <div className='bg-white rounded-2xl p-8 shadow-lg border border-gray-100 mb-8'>
               <CartTotal />
             </div>
@@ -162,7 +162,7 @@ const PlaceOrder = () => {
                 <div className='text-2xl md:text-3xl mb-4'>
                   <Title text1={'PAYMENT'} text2={'METHOD'}/>
                 </div>
-                <div className='w-24 h-1 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-full'></div>
+                <div className='w-24 h-1 bg-linear-to-r from-yellow-500 to-yellow-600 rounded-full'></div>
               </div>
               
               <div className='space-y-4 mb-8'>
@@ -216,7 +216,7 @@ const PlaceOrder = () => {
 
               <button disabled
                 type='submit'
-                className='w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white py-4 px-8 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95'
+                className='w-full bg-linear-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white py-4 px-8 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95'
               >
                 PLACE ORDER
               </button>

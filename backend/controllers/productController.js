@@ -95,4 +95,68 @@ const updateStock = async (req, res) => {
     }
 }
 
-export { listProduct, addProduct, removeProduct, singleProduct, updateStock }
+const updateProduct = async (req, res) => {
+  try {
+    const { productId, name, description, price, category, subCategory, sizes, bestseller } = req.body;
+
+    const product = await productModel.findById(productId);
+    if (!product) {
+      return res.json({ success: false, message: "Product not found" });
+    }
+
+    // -------- Handle Images --------
+    const image1 = req.files?.image1?.[0];
+    const image2 = req.files?.image2?.[0];
+    const image3 = req.files?.image3?.[0];
+    const image4 = req.files?.image4?.[0];
+
+    const newImages = [image1, image2, image3, image4].filter(Boolean);
+
+    let imagesUrl = product.images; // keep old images by default
+
+    if (newImages.length > 0) {
+      imagesUrl = await Promise.all(
+        newImages.map(async (item) => {
+          const result = await cloudinary.uploader.upload(
+            `data:${item.mimetype};base64,${item.buffer.toString("base64")}`,
+            { resource_type: "image" }
+          );
+          return result.secure_url;
+        })
+      );
+    }
+
+    // -------- Handle Sizes --------
+    let parsedSizes = product.sizes;
+    if (sizes) {
+      const incomingSizes = JSON.parse(sizes);
+      parsedSizes = incomingSizes.map(item => ({
+        size: item.size,
+        stock: Number(item.stock)
+      }));
+    }
+
+    // -------- Update Product --------
+    product.name = name ?? product.name;
+    product.description = description ?? product.description;
+    product.price = price ? Number(price) : product.price;
+    product.category = category ?? product.category;
+    product.subCategory = subCategory ?? product.subCategory;
+    product.bestseller = bestseller === "true";
+    product.sizes = parsedSizes;
+    product.images = imagesUrl;
+
+    await product.save();
+    await checkStockAndNotify();
+
+    res.json({ success: true, message: "Product updated successfully" });
+
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+
+
+export { listProduct, addProduct, removeProduct, singleProduct, updateStock, updateProduct }

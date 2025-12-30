@@ -24,14 +24,14 @@ const Cart = () => {
     setCartData(tempData);
   },[cartItems])
   return (
-    <div className='bg-gradient-to-b from-yellow-50/30 to-white min-h-screen'>
+    <div className='bg-linear-to-b from-yellow-50/30 to-white min-h-screen'>
       <div className='border-t border-gray-200 pt-12 max-w-6xl mx-auto px-4'>
         
         <div className='text-center mb-12'>
           <div className='text-3xl md:text-4xl mb-4'>
             <Title text1={'YOUR'} text2={'CART'}/>
           </div>
-          <div className='w-24 h-1 bg-gradient-to-r from-yellow-500 to-yellow-600 mx-auto rounded-full'></div>
+          <div className='w-24 h-1 bg-linear-to-r from-yellow-500 to-yellow-600 mx-auto rounded-full'></div>
         </div>
 
         {cartData.length === 0 ? (
@@ -45,7 +45,7 @@ const Cart = () => {
               <p className='text-gray-600 mb-8'>Add some products to get started!</p>
               <button 
                 onClick={() => navigate('/collection')} 
-                className='bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105'
+                className='bg-linear-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105'
               >
                 Continue Shopping
               </button>
@@ -69,12 +69,12 @@ const Cart = () => {
                               alt="" 
                               className='w-20 h-20 md:w-24 md:h-24 object-cover rounded-xl group-hover:scale-105 transition-transform duration-300'
                             />
-                            <div className='absolute inset-0 bg-gradient-to-t from-black/10 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
+                            <div className='absolute inset-0 bg-linear-to-t from-black/10 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
                           </div>
                           <div className='flex-1'>
                             <h3 className='text-lg md:text-xl font-semibold text-gray-800 mb-2 leading-tight'>{productData.name}</h3>
                             <div className='flex items-center gap-4 flex-wrap'>
-                              <p className='text-2xl font-bold bg-gradient-to-r from-yellow-600 to-yellow-500 bg-clip-text text-transparent'>
+                              <p className='text-2xl font-bold bg-linear-to-r from-yellow-600 to-yellow-500 bg-clip-text text-transparent'>
                                 {currency}{productData.price}
                               </p>
                               <span className='px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm font-medium'>
@@ -112,7 +112,7 @@ const Cart = () => {
             </div>
 
             <div className='flex justify-end'>
-              <div className='w-full md:w-[500px]'>
+              <div className='w-full md:w-125'>
                 <div className='bg-white rounded-2xl p-8 shadow-lg border border-gray-100'>
                   <CartTotal />
                   <button
@@ -127,7 +127,7 @@ const Cart = () => {
                       }
                       navigate('/place-order');
                     }}
-                    className='w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white py-4 px-8 rounded-xl font-semibold text-lg mt-8 transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95'
+                    className='w-full bg-linear-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white py-4 px-8 rounded-xl font-semibold text-lg mt-8 transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95'
                   >
                     PROCEED TO CHECKOUT
                   </button>

@@ -80,7 +80,7 @@ const Add = ({token}) => {
       <div className='bg-white rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6 lg:p-8'>
         <div className='mb-6 sm:mb-8'>
           <h1 className='text-2xl sm:text-3xl font-bold text-gray-800 mb-2'>Add New Product</h1>
-          <div className='w-16 sm:w-20 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full'></div>
+          <div className='w-16 sm:w-20 h-1 bg-linear-to-r from-yellow-400 to-yellow-600 rounded-full'></div>
           <p className='text-gray-600 mt-3 text-sm sm:text-base'>Fill in the details below to add a new product to your store</p>
         </div>
 
@@ -238,7 +238,7 @@ const Add = ({token}) => {
 
           <button 
             type='submit' 
-            className='w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white py-3 sm:py-4 rounded-xl font-semibold text-base sm:text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95'
+            className='w-full bg-linear-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white py-3 sm:py-4 rounded-xl font-semibold text-base sm:text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95'
           >
             Add Product
           </button>

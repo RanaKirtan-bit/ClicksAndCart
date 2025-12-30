@@ -31,9 +31,9 @@ const OurPolicy = () => {
   ]
 
   return (
-    <div className='bg-gradient-to-r from-gray-50 to-white py-16 px-4'>
+    <div className='bg-linear-to-r from-gray-50 to-white py-16 px-4'>
       <div className='max-w-6xl mx-auto'>
-        <div className='text-center mb-2 text-center text-3xl py-8'>
+        <div className='text-align-center mb-2 text-align-center text-3xl py-8'>
           <Title text1={'Our'} text2={'Commitment'}/>
           <p className='w-3/4 m-auto text-xs sm:text-sm md:text-base tetx-gray-600'>
             These are what we provide more than just a fashion products. 
@@ -46,7 +46,7 @@ const OurPolicy = () => {
               key={index}
               className={`group relative bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-100 hover:border-gray-200 hover:-translate-y-2`}
             >
-              <div className={`absolute inset-0 bg-gradient-to-br ${policy.gradient} opacity-0 group-hover:opacity-50 transition-opacity duration-500 rounded-2xl`}></div>
+              <div className={`absolute inset-0 bg-linear-to-br ${policy.gradient} opacity-0 group-hover:opacity-50 transition-opacity duration-500 rounded-2xl`}></div>
               
               <div className='relative z-10 text-center'>
                 <div className={`w-20 h-20 ${policy.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg group-hover:shadow-xl`}>
@@ -65,7 +65,7 @@ const OurPolicy = () => {
                   {policy.description}
                 </p>
                 
-                <div className='mt-6 w-12 h-1 bg-gradient-to-r from-gray-300 to-gray-400 group-hover:from-blue-400 group-hover:to-purple-400 mx-auto rounded-full transition-all duration-500'></div>
+                <div className='mt-6 w-12 h-1 bg-linear-to-r from-gray-300 to-gray-400 group-hover:from-blue-400 group-hover:to-purple-400 mx-auto rounded-full transition-all duration-500'></div>
               </div>
               
               <div className='absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-gradient-to-r group-hover:from-blue-200 group-hover:to-purple-200 transition-all duration-300'></div>

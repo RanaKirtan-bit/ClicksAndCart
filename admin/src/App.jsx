@@ -9,6 +9,7 @@ import UpdateStock from "./pages/UpdateStock";
 import Login from "./components/Login";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import UpdateProduct from "./pages/UpdateProduct";
 
 export const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
 
@@ -21,7 +22,7 @@ const App = () => {
   },[token])
 
   return (
-    <div className="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
+    <div className="bg-linear-to-br from-gray-50 to-gray-100 min-h-screen">
       <ToastContainer 
         position="top-right"
         autoClose={3000}
@@ -47,6 +48,7 @@ const App = () => {
                 <Route path="/add" element={<Add token={token} />} />
                 <Route path="/list" element={<List token={token} />} />
                 <Route path="/update-stock" element={<UpdateStock token={token} />} />
+                <Route path="/update-product" element={<UpdateProduct token={token} />} />
                 <Route path="/orders" element={<Orders token={token} />} />
               </Routes>
             </div>

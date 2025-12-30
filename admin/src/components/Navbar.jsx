@@ -23,7 +23,7 @@ const Navbar = ({setToken, setSidebarOpen, sidebarOpen}) => {
       </div>
       <button 
         onClick={()=>setToken('')} 
-        className='bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-4 py-2 sm:px-6 rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg'
+        className='bg-linear-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-4 py-2 sm:px-6 rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg'
       >
         Logout
       </button>

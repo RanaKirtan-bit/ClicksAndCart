@@ -56,7 +56,7 @@ const Orders = () => {
 
   if (loading) {
     return (
-      <div className='flex items-center justify-center min-h-[400px]'>
+      <div className='flex items-center justify-center min-h-100'>
         <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-green-600'></div>
       </div>
     )
@@ -67,7 +67,7 @@ const Orders = () => {
       <div className='bg-white rounded-2xl shadow-lg border border-gray-100 p-8'>
         <div className='mb-8'>
           <h1 className='text-3xl font-bold text-gray-800 mb-2'>Order Management</h1>
-          <div className='w-20 h-1 bg-gradient-to-r from-green-400 to-green-600 rounded-full'></div>
+          <div className='w-20 h-1 bg-linear-to-r from-green-400 to-green-600 rounded-full'></div>
           <p className='text-gray-600 mt-3'>Track and manage customer orders</p>
         </div>
 
@@ -81,7 +81,7 @@ const Orders = () => {
           ].map((item) => {
             const count = orders.filter(order => order.status === item.status).length
             return (
-              <div key={item.status} className={`bg-gradient-to-r from-${item.color}-50 to-${item.color}-100 p-4 rounded-xl border border-${item.color}-200`}>
+              <div key={item.status} className={`bg-linear-to-r from-${item.color}-50 to-${item.color}-100 p-4 rounded-xl border border-${item.color}-200`}>
                 <h3 className={`text-sm font-semibold text-${item.color}-800`}>{item.status}</h3>
                 <p className={`text-xl font-bold text-${item.color}-600`}>{count}</p>
               </div>
@@ -101,7 +101,7 @@ const Orders = () => {
               <div key={index} className='border border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow duration-300'>
                 <div className='flex flex-col lg:flex-row lg:items-center justify-between mb-4'>
                   <div className='flex items-center gap-4 mb-4 lg:mb-0'>
-                    <div className='w-12 h-12 bg-gradient-to-r from-green-400 to-green-500 rounded-full flex items-center justify-center text-white font-bold'>
+                    <div className='w-12 h-12 bg-linear-to-r from-green-400 to-green-500 rounded-full flex items-center justify-center text-white font-bold'>
                       #{index + 1}
                     </div>
                     <div>

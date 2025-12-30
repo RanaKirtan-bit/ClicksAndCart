@@ -5,14 +5,14 @@ import NewsletterBox from '../components/NewsletterBox'
 
 const About = () => {
   return (
-    <div className='bg-gradient-to-b from-yellow-50/30 to-white min-h-screen'>
+    <div className='bg-linear-to-b from-yellow-50/30 to-white min-h-screen'>
       <div className='border-t border-gray-200 pt-12 max-w-7xl mx-auto px-4'>
         
         <div className='text-center mb-16'>
           <div className='text-3xl md:text-4xl mb-4'>
             <Title text1={'ABOUT'} text2={'US'}/>
           </div>
-          <div className='w-24 h-1 bg-gradient-to-r from-yellow-500 to-yellow-600 mx-auto rounded-full'></div>
+          <div className='w-24 h-1 bg-linear-to-r from-yellow-500 to-yellow-600 mx-auto rounded-full'></div>
         </div>
 
         <div className='mb-20'>
@@ -52,12 +52,12 @@ const About = () => {
             <div className='text-2xl md:text-3xl mb-4'>
               <Title text1={'WHY'} text2={'CHOOSE US'}/>
             </div>
-            <div className='w-24 h-1 bg-gradient-to-r from-yellow-500 to-yellow-600 mx-auto rounded-full'></div>
+            <div className='w-24 h-1 bg-linear-to-r from-yellow-500 to-yellow-600 mx-auto rounded-full'></div>
           </div>
 
           <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
             <div className='bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2'>
-              <div className='w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 mx-auto'>
+              <div className='w-16 h-16 bg-linear-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 mx-auto'>
                 <svg className='w-8 h-8 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                   <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' />
                 </svg>
@@ -70,7 +70,7 @@ const About = () => {
             </div>
             
             <div className='bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2'>
-              <div className='w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6 mx-auto'>
+              <div className='w-16 h-16 bg-linear-to-r from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6 mx-auto'>
                 <svg className='w-8 h-8 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                   <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M13 10V3L4 14h7v7l9-11h-7z' />
                 </svg>
@@ -83,7 +83,7 @@ const About = () => {
             </div>
             
             <div className='bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2'>
-              <div className='w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 mx-auto'>
+              <div className='w-16 h-16 bg-linear-to-r from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 mx-auto'>
                 <svg className='w-8 h-8 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                   <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z' />
                 </svg>

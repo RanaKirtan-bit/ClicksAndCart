@@ -28,11 +28,11 @@ const Product = () => {
   },[productId])
 
   return productData ? (
-    <div className='bg-gradient-to-b from-yellow-50/30 to-white min-h-screen'>
+    <div className='bg-linear-to-b from-yellow-50/30 to-white min-h-screen'>
       <div className='border-t border-gray-200 pt-12 transition-opacity ease-in duration-500 opacity-100'>
         <div className='flex gap-6 lg:gap-8 flex-col lg:flex-row max-w-7xl mx-auto px-4'>
           <div className='flex-1 flex flex-col-reverse gap-4 lg:flex-row'>            
-            <div className='flex lg:flex-col overflow-x-auto lg:overflow-y-auto justify-between lg:justify-start lg:w-28 gap-2 lg:h-full lg:max-h-[600px] scrollbar-hide'>
+            <div className='flex lg:flex-col overflow-x-auto lg:overflow-y-auto justify-between lg:justify-start lg:w-28 gap-2 lg:h-full lg:max-h-150 scrollbar-hide'>
               {
                 productData.images.map((item, index)=>(
                   <img 
@@ -40,7 +40,7 @@ const Product = () => {
                     src={item} 
                     key={index} 
                     alt="" 
-                    className={`w-20 h-20 lg:w-full lg:h-28 object-cover rounded-xl cursor-pointer transition-all duration-300 border-2 flex-shrink-0 ${
+                    className={`w-20 h-20 lg:w-full lg:h-28 object-cover rounded-xl cursor-pointer transition-all duration-300 border-2 shrink-0 ${
                       image === item ? 'border-yellow-500 shadow-lg scale-105' : 'border-gray-200 hover:border-yellow-300'
                     }`}
                   />
@@ -48,7 +48,7 @@ const Product = () => {
               }
             </div>
             
-            <div className='flex-1 bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 shadow-lg lg:h-full lg:max-h-[600px] flex items-center'>
+            <div className='flex-1 bg-linear-to-br from-gray-50 to-white rounded-2xl p-6 shadow-lg lg:h-full lg:max-h-150 flex items-center'>
               <img src={image} alt="" className='w-full h-auto max-h-full object-contain rounded-xl hover:scale-105 transition-transform duration-500'/>
             </div>
           </div>
@@ -69,7 +69,7 @@ const Product = () => {
               </div>
               
               <div className='mb-6'>
-                <p className='text-4xl font-bold bg-gradient-to-r from-yellow-600 to-yellow-500 bg-clip-text text-transparent'>
+                <p className='text-4xl font-bold bg-linear-to-r from-yellow-600 to-yellow-500 bg-clip-text text-transparent'>
                   {currency}{productData.price}
                 </p>
               </div>
@@ -110,7 +110,7 @@ const Product = () => {
                   addToCart(productData._id, size)
                 }}
                 disabled={!size || productData.sizes.find(s => s.size === size)?.stock === 0}
-                className='w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white py-4 px-8 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 mb-8 disabled:opacity-50 disabled:cursor-not-allowed'
+                className='w-full bg-linear-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white py-4 px-8 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 mb-8 disabled:opacity-50 disabled:cursor-not-allowed'
               >
                 {token ? 'ADD TO CART' : 'LOGIN TO ADD TO CART'}
               </button>

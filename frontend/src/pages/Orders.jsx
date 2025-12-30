@@ -25,14 +25,14 @@ const Orders = () => {
     loadOrderData()
   }, [token])
   return (
-    <div className='bg-gradient-to-b from-yellow-50/30 to-white min-h-screen'>
+    <div className='bg-linear-to-b from-yellow-50/30 to-white min-h-screen'>
       <div className='border-t border-gray-200 pt-12 max-w-6xl mx-auto px-4'>
 
         <div className='text-center mb-12'>
           <div className='text-3xl md:text-4xl mb-4'>
             <Title text1={'MY'} text2={'ORDERS'}/>
           </div>
-          <div className='w-24 h-1 bg-gradient-to-r from-yellow-500 to-yellow-600 mx-auto rounded-full'></div>
+          <div className='w-24 h-1 bg-linear-to-r from-yellow-500 to-yellow-600 mx-auto rounded-full'></div>
         </div>
 
         <div className='space-y-6'>
@@ -107,7 +107,7 @@ const Orders = () => {
               <p className='text-gray-600 mb-8'>Start shopping to see your orders here!</p>
               <button 
                 onClick={() => window.location.href = '/collection'} 
-                className='bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105'
+                className='bg-linear-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105'
               >
                 Start Shopping
               </button>

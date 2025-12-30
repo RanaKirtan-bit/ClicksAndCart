@@ -45,7 +45,7 @@ const Login = () => {
   }
 
   return (
-    <div className='bg-gradient-to-b from-yellow-50/30 to-white min-h-screen flex items-center justify-center py-12 px-4'>
+    <div className='bg-linear-to-b from-yellow-50/30 to-white min-h-screen flex items-center justify-center py-12 px-4'>
       <div className='w-full max-w-md'>
       
         <div className='bg-white rounded-2xl shadow-xl border border-gray-100 p-8 md:p-10'>
@@ -54,7 +54,7 @@ const Login = () => {
             <h1 className='text-3xl md:text-4xl font-bold text-gray-800 mb-4'>
               {currentState}
             </h1>
-            <div className='w-16 h-1 bg-gradient-to-r from-yellow-500 to-yellow-600 mx-auto rounded-full'></div>
+            <div className='w-16 h-1 bg-linear-to-r from-yellow-500 to-yellow-600 mx-auto rounded-full'></div>
             <p className='text-gray-600 mt-4'>
               {currentState === 'Login' 
                 ? 'Welcome back! Please sign in to your account.' 
@@ -133,7 +133,7 @@ const Login = () => {
 
             <button 
               type='submit'
-              className='w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white py-4 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95'
+              className='w-full bg-linear-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white py-4 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95'
             >
               {currentState === 'Login' ? 'Sign In' : 'Create Account'}
             </button>

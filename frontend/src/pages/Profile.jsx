@@ -10,19 +10,19 @@ const Profile = () => {
   }
 
   return (
-    <div className='bg-gradient-to-b from-yellow-50/30 to-white min-h-screen'>
+    <div className='bg-linear-to-b from-yellow-50/30 to-white min-h-screen'>
       <div className='border-t border-gray-200 pt-12 max-w-4xl mx-auto px-4'>
         
         <div className='text-center mb-16'>
           <div className='text-3xl md:text-4xl mb-4'>
             <h1 className='text-3xl font-bold text-gray-800'>MY PROFILE</h1>
           </div>
-          <div className='w-24 h-1 bg-gradient-to-r from-yellow-500 to-yellow-600 mx-auto rounded-full'></div>
+          <div className='w-24 h-1 bg-linear-to-r from-yellow-500 to-yellow-600 mx-auto rounded-full'></div>
         </div>
 
         <div className='bg-white rounded-2xl p-8 shadow-lg border border-gray-100'>
           <div className='flex items-center gap-6 mb-8'>
-            <div className='w-20 h-20 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center'>
+            <div className='w-20 h-20 bg-linear-to-r from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center'>
               <span className='text-2xl font-bold text-white'>
                 {userData?.name?.charAt(0).toUpperCase()}
               </span>
@@ -34,7 +34,7 @@ const Profile = () => {
           </div>
 
           <div className='grid md:grid-cols-2 gap-6'>
-            <div className='bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-xl border border-blue-200'>
+            <div className='bg-linear-to-r from-blue-50 to-blue-100 p-6 rounded-xl border border-blue-200'>
               <h3 className='text-lg font-semibold text-blue-800 mb-4'>Account Information</h3>
               <div className='space-y-3'>
                 <div>
@@ -48,7 +48,7 @@ const Profile = () => {
               </div>
             </div>
 
-            <div className='bg-gradient-to-r from-green-50 to-green-100 p-6 rounded-xl border border-green-200'>
+            <div className='bg-linear-to-r from-green-50 to-green-100 p-6 rounded-xl border border-green-200'>
               <h3 className='text-lg font-semibold text-green-800 mb-4'>Quick Actions</h3>
               <div className='space-y-3'>
                 <button 

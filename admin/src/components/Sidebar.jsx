@@ -18,7 +18,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
         <div className="flex flex-col gap-2 pt-6 lg:pt-8 px-3 lg:px-4">
           <div className="mb-4">
             <h2 className="text-base lg:text-lg font-semibold text-gray-800 mb-2">Dashboard</h2>
-            <div className="w-full h-px bg-gradient-to-r from-yellow-400 to-yellow-600"></div>
+            <div className="w-full h-px bg-linear-to-r from-yellow-400 to-yellow-600"></div>
           </div>
           
           <NavLink
@@ -27,7 +27,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             className={({ isActive }) =>
               `flex items-center gap-3 px-3 lg:px-4 py-3 rounded-xl transition-all duration-300 hover:bg-yellow-50 group ${
                 isActive || window.location.pathname === '/' 
-                  ? "bg-gradient-to-r from-yellow-100 to-yellow-50 border-l-4 border-yellow-500 text-yellow-700 shadow-sm" 
+                  ? "bg-linear-to-r from-yellow-100 to-yellow-50 border-l-4 border-yellow-500 text-yellow-700 shadow-sm" 
                   : "text-gray-600 hover:text-yellow-600"
               }`
             }
@@ -51,7 +51,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             className={({ isActive }) =>
               `flex items-center gap-3 px-3 lg:px-4 py-3 rounded-xl transition-all duration-300 hover:bg-blue-50 group ${
                 isActive
-                  ? "bg-gradient-to-r from-blue-100 to-blue-50 border-l-4 border-blue-500 text-blue-700 shadow-sm"
+                  ? "bg-linear-to-r from-blue-100 to-blue-50 border-l-4 border-blue-500 text-blue-700 shadow-sm"
                   : "text-gray-600 hover:text-blue-600"
               }`
             }
@@ -75,7 +75,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             className={({ isActive }) =>
               `flex items-center gap-3 px-3 lg:px-4 py-3 rounded-xl transition-all duration-300 hover:bg-purple-50 group ${
                 isActive
-                  ? "bg-gradient-to-r from-purple-100 to-purple-50 border-l-4 border-purple-500 text-purple-700 shadow-sm"
+                  ? "bg-linear-to-r from-purple-100 to-purple-50 border-l-4 border-purple-500 text-purple-700 shadow-sm"
                   : "text-gray-600 hover:text-purple-600"
               }`
             }
