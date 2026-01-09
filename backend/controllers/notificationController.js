@@ -13,7 +13,6 @@ const transporter = nodemailer.createTransport({
 
 export const checkStockAndNotify = async () => {
   try {
-    // Safety check
     if (!process.env.EMAIL || !process.env.PASSWORD) {
       console.log('Email credentials not configured. Skipping stock notifications.');
       return;
@@ -22,7 +21,6 @@ export const checkStockAndNotify = async () => {
     const products = await productModel.find({});
     const lowStockProducts = [];
 
-    // Collect low-stock products
     for (const product of products) {
       const totalStock = product.sizes.reduce(
         (acc, size) => acc + size.stock,
@@ -39,13 +37,11 @@ export const checkStockAndNotify = async () => {
       }
     }
 
-    // If none are low-stock, skip email
     if (lowStockProducts.length === 0) {
       console.log('No low-stock products found.');
       return;
     }
 
-    // Build HTML cards
     const productCards = lowStockProducts
       .map(
         (p) => `
@@ -62,7 +58,6 @@ export const checkStockAndNotify = async () => {
       )
       .join('');
 
-    // Send ONE email
     await transporter.sendMail({
       from: `"Clicks & Cart Alerts" <${process.env.EMAIL}>`,
       to: 'admin@example.com',

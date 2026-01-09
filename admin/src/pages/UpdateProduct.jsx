@@ -128,7 +128,7 @@ const UpdateProduct = ({ token }) => {
                     {imgSrc ? (
                       <img
                         src={imgSrc}
-                        className="w-full h-full object-full rounded-lg"
+                        className="w-full h-full object-fit rounded-lg"
                         alt="Product"
                       />
                     ) : (
