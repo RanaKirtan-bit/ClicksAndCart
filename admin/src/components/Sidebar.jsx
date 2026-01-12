@@ -20,9 +20,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             <h2 className="text-base lg:text-lg font-semibold text-gray-800 mb-2">Dashboard</h2>
             <div className="w-full h-px bg-linear-to-r from-yellow-400 to-yellow-600"></div>
           </div>
-          
+
           <NavLink
-            to="/add"
+            to="/"
             onClick={() => setSidebarOpen(false)}
             className={({ isActive }) =>
               `flex items-center gap-3 px-3 lg:px-4 py-3 rounded-xl transition-all duration-300 hover:bg-yellow-50 group ${
@@ -33,7 +33,31 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             }
           >
             <div className={`p-2 rounded-lg transition-colors duration-300 ${
-              window.location.pathname === '/' || window.location.pathname === '/add'
+              window.location.pathname === '/'
+                ? "bg-yellow-200" 
+                : "bg-gray-100 group-hover:bg-yellow-100"
+            }`}>
+              <img src={assets.add_icon} alt="" className="w-4 h-4 lg:w-5 lg:h-5" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="font-medium text-sm lg:text-base truncate">Admin Dashboard</p>
+              <p className="text-xs opacity-75 truncate">View Sales Related Data.</p>
+            </div>
+          </NavLink>
+
+          <NavLink
+            to="/add"
+            onClick={() => setSidebarOpen(false)}
+            className={({ isActive }) =>
+              `flex items-center gap-3 px-3 lg:px-4 py-3 rounded-xl transition-all duration-300 hover:bg-yellow-50 group ${
+                isActive || window.location.pathname === '/add' 
+                  ? "bg-linear-to-r from-yellow-100 to-yellow-50 border-l-4 border-yellow-500 text-yellow-700 shadow-sm" 
+                  : "text-gray-600 hover:text-yellow-600"
+              }`
+            }
+          >
+            <div className={`p-2 rounded-lg transition-colors duration-300 ${
+              window.location.pathname === '/add'
                 ? "bg-yellow-200" 
                 : "bg-gray-100 group-hover:bg-yellow-100"
             }`}>
