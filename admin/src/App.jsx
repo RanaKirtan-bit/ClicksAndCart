@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import UpdateProduct from "./pages/UpdateProduct";
+import Dashboard from "./pages/Dashboard";
 
 export const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
 
@@ -44,7 +45,8 @@ const App = () => {
             <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
             <div className="flex-1 w-full lg:ml-0 px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
               <Routes>
-                <Route path="/" element={<Navigate to="/add" replace />} />
+                {/* <Route path="/" element={<Navigate to="/add" replace />} /> */}
+                <Route path="/" element={<Dashboard token={token} />} />
                 <Route path="/add" element={<Add token={token} />} />
                 <Route path="/list" element={<List token={token} />} />
                 <Route path="/update-stock" element={<UpdateStock token={token} />} />
