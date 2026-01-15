@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { backendUrl } from "../App";
+import Chart from "../components/Chart";
 
 const Dashboard = ({ token }) => {
   const [data, setData] = useState({
@@ -54,6 +55,10 @@ const Dashboard = ({ token }) => {
           Product/Category Wise Ordered List{" "}
         </h3>
         {/* Map through data.orders here to show items */}
+      </div>
+
+      <div className="bg-white p-6 rounded-xl shadow">
+        <Chart />
       </div>
     </div>
   );

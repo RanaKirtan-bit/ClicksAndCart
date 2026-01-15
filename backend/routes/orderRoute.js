@@ -1,5 +1,5 @@
 import express from 'express'
-import { placeOrder, userOrders, listOrders, updateStatus } from '../controllers/orderController.js'
+import { placeOrder, userOrders, listOrders, updateStatus, categoryWiseOrder } from '../controllers/orderController.js'
 import authUser from '../middleware/auth.js'
 
 const orderRouter = express.Router()
@@ -9,5 +9,7 @@ orderRouter.post('/status', updateStatus)
 
 orderRouter.post('/place', authUser, placeOrder)
 orderRouter.post('/userorders', authUser, userOrders)
+
+orderRouter.get('/categorywise-order', categoryWiseOrder)
 
 export default orderRouter
