@@ -8,8 +8,7 @@ import productRouter from './routes/productRoute.js'
 import cartRouter from './routes/cartRoute.js'
 import orderRouter from './routes/orderRoute.js'
 import reportRouter from './routes/reportRoute.js'
-
-
+import categoryRouter from './routes/categoryRoute.js'
 
 const app = express()
 const PORT = 5000
@@ -23,6 +22,7 @@ app.use('/api/user', userRouter);
 app.use('/api/product', productRouter);
 app.use('/api/cart', cartRouter);
 app.use('/api/order', orderRouter);
+app.use('/api/category', categoryRouter);
 app.use('/api/admin', reportRouter);
 app.get("/", (req,res)=>{
       res.send("API Working")

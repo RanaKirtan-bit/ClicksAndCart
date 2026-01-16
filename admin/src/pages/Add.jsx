@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { assets } from '../assets/assets'
 import axios from 'axios'
 import { backendUrl } from '../App'
@@ -17,6 +17,22 @@ const Add = ({token}) => {
   const [subCategory, setSubCategory] = useState("Topwear")
   const [bestseller, setBestseller] = useState(false)
   const [sizes, setSizes] = useState([])
+  const [categories, setCategories] = useState([])
+
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get(backendUrl + "/api/category/list");
+      if (response.data.success) {
+        setCategories(response.data.categories);
+      }
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
 
   const handleSizeChange = (size) => {
     setSizes(prev => {
@@ -165,14 +181,14 @@ const Add = ({token}) => {
           <div className='grid sm:grid-cols-2 gap-4 sm:gap-6'>
             <div>
               <label className='block text-sm font-semibold text-gray-700 mb-2'>Category</label>
-              <select 
-                onChange={(e) => setCategory(e.target.value)} 
+              <select
+                onChange={(e) => setCategory(e.target.value)}
                 value={category}
                 className='w-full px-3 sm:px-4 py-2 sm:py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-500 focus:outline-none transition-colors duration-200 text-sm sm:text-base'
               >
-                <option value="Men">Men</option>
-                <option value="Women">Women</option>
-                <option value="Kids">Kids</option>
+                {categories.map((cat) => (
+                  <option key={cat._id} value={cat.name}>{cat.name}</option>
+                ))}
               </select>
             </div>
 

@@ -11,6 +11,18 @@ const List = ({token}) => {
   const [searchTerm, setSearchTerm] = useState('')
   const [categoryFilter, setCategoryFilter] = useState('All')
   const [loading, setLoading] = useState(true)
+  const [categories, setCategories] = useState([])
+
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get(backendUrl + "/api/category/list");
+      if (response.data.success) {
+        setCategories(response.data.categories);
+      }
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
 
   const fetchList = async () => {
     try {
@@ -42,6 +54,10 @@ const List = ({token}) => {
       toast.error(error.message)
     }
   }
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
 
   useEffect(() => {
     fetchList()
@@ -96,9 +112,9 @@ const List = ({token}) => {
             className='px-3 sm:px-4 py-2 sm:py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors duration-200 text-sm sm:text-base'
           >
             <option value="All">All Categories</option>
-            <option value="Men">Men</option>
-            <option value="Women">Women</option>
-            <option value="Kids">Kids</option>
+            {categories.map((cat) => (
+              <option key={cat._id} value={cat.name}>{cat.name}</option>
+            ))}
           </select>
         </div>
 

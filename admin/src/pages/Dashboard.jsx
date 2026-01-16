@@ -10,6 +10,10 @@ const Dashboard = ({ token }) => {
     orders: [],
   });
 
+  const [categories, setCategories] = useState([]);
+  const [newCategory, setNewCategory] = useState("");
+  const [newCategoryDesc, setNewCategoryDesc] = useState("");
+
   const fetchMonthlyData = async () => {
     try {
       const response = await axios.get(backendUrl + "/api/admin/monthlyorder", {
@@ -30,8 +34,51 @@ const Dashboard = ({ token }) => {
     }
   };
 
+  const fetchCategories = async () => {
+     try {
+      const response = await axios.get(backendUrl + "/api/category/list");
+      if(response.data.success){
+        const categories = response.data.categories;
+        setCategories(categories);
+        console.log(categories);
+        return true;
+      }
+     } catch (error) {
+      console.error("Error fetching categories..", error)
+     }
+  }
+
+  const addCategory = async () => {
+    try {
+      const response = await axios.post(backendUrl + "/api/category/add", { name: newCategory, description: newCategoryDesc }, { headers: { token } });
+      if (response.data.success) {
+        setNewCategory("");
+        setNewCategoryDesc("");
+        fetchCategories();
+      } else {
+        alert(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error adding category:", error);
+    }
+  };
+
+  const removeCategory = async (id) => {
+    try {
+      const response = await axios.post(backendUrl + "/api/category/remove", { id }, { headers: { token } });
+      if (response.data.success) {
+        fetchCategories();
+      } else {
+        alert(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error removing category:", error);
+    }
+  };
+
   useEffect(() => {
     fetchMonthlyData();
+    fetchCategories();
   }, []);
 
   return (
@@ -59,6 +106,53 @@ const Dashboard = ({ token }) => {
 
       <div className="bg-white p-6 rounded-xl shadow">
         <Chart />
+      </div>
+
+      {/* Category Management */}
+      <div className="bg-white p-6 rounded-lg shadow-md mt-6">
+        <h3 className="text-lg font-semibold mb-4">Category Management</h3>
+
+        {/* Add Category Form */}
+        <div className="mb-4">
+          <input
+            type="text"
+            placeholder="Category Name"
+            value={newCategory}
+            onChange={(e) => setNewCategory(e.target.value)}
+            className="border p-2 mr-2"
+          />
+          <input
+            type="text"
+            placeholder="Description"
+            value={newCategoryDesc}
+            onChange={(e) => setNewCategoryDesc(e.target.value)}
+            className="border p-2 mr-2"
+          />
+          <button
+            onClick={addCategory}
+            className="bg-blue-500 text-white px-4 py-2 rounded"
+          >
+            Add Category
+          </button>
+        </div>
+
+        {/* List Categories */}
+        <div>
+          <h4 className="text-md font-semibold mb-2">Categories List</h4>
+          <ul className="list-disc pl-5">
+            {categories.map((category) => (
+              <li key={category._id} className="flex justify-between items-center mb-2">
+                <span>{category.name} - {category.description}</span>
+                <button
+                  onClick={() => removeCategory(category._id)}
+                  className="bg-red-500 text-white px-2 py-1 rounded text-sm"
+                >
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
